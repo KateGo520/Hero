@@ -1,0 +1,623 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/data.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/pageLayout.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/homePage.css' %}"/>
+    <link rel='stylesheet' href="{% static 'css/Diagnosis.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+    <link rel='stylesheet' href="{% static 'css/loader.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1/jquery-3.5.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1/jquery.particleground.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+
+</head>
+<body style="width:100%;background-color: #062427;margin: 0;">
+<div id="body_div" style="width:100%;height:100%;">
+    <div class="top_menu" id="head_div"
+         style="float:left;width:100%;height: 65px;background-color: #000000;background: rgba(0,0,0,0.5);position: absolute;top: 0;left:0;">
+        <ul>
+            <li>
+                <div class="head_menu" id="About">
+                    <span style="cursor: pointer">About</span>
+                </div>
+            </li>
+            {#            <li>#}
+            {#                <div class="head_menu" id="Demo">#}
+            {#                    <span style="cursor: pointer">Demo</span>#}
+            {#                </div>#}
+            {#            </li>#}
+            {#            <li>#}
+            {#                <div class="head_menu" id="Ecosystem">#}
+            {#                    <span style="cursor: pointer">Ecosystem</span>#}
+            {#                </div>#}
+            {#            </li>#}
+            <li>
+                <div class="head_menu" id="BenchmarkDataset">
+                    <span style="cursor: pointer">Benchmark Dataset</span>
+                </div>
+            </li>
+            <li>
+                <div class="head_menu" id="EmpiricalStudyDataset">
+                    <span style="cursor: pointer">Empirical Study Dataset</span>
+                </div>
+            </li>
+            <li>
+                <div class="head_menu" id="Issuereport">
+                    <span style="cursor: pointer">Issue Reports</span>
+                </div>
+            </li>
+            <li>
+                <div class="head_menu" id="Diagnosis">
+                    <span style="cursor: pointer">Diagnosis</span>
+                </div>
+            </li>
+            <li class="aa">
+                <div class="head_menu active" id="Home">
+                    <span style="cursor: pointer">Home</span>
+                </div>
+            </li>
+        </ul>
+        <div style="float:left;margin-left:20px;">
+            <img id="logo_img" style="margin-top: 6px;height: 52px;" src="{% static 'img/颜色logo.png' %}"/>
+        </div>
+    </div>
+    <div id="main_div" class="main_content" style="overflow-y: auto;position: absolute;top:65px;width:100%;">
+        <ul>
+            <!--Home-->
+            <li class="aa">
+                <div style="position: absolute;top: 0;width:100%;height:100%;min-height:870px;border-radius: 10px;background-image: url({% static 'img/homeBackgroundImage.png' %});background-position: bottom;background-repeat: no-repeat;">
+                    <div id="h2w_div"
+                         style="width:299px;height:60px;margin:auto;text-align: center;margin-top:200px;border-radius: 36px;background-color: rgba(54,164,80,0.7);box-shadow: inset 0px 0px 4px 0px #ffffff;">
+                        <div id="click_div" style="float: left;margin-left: 13px;margin-top: 10px;">
+                            <img src='{% static 'img/seq/点击0000.png' %}' class="click_no_active click_active"/>
+                            <img src='{% static 'img/seq/点击0001.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0002.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0003.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0004.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0005.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0006.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0007.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0008.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0009.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0010.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0011.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0012.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0013.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0014.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0015.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0016.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0017.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0018.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0019.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0020.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0021.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0022.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0023.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0024.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0025.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0026.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0027.png' %}' class="click_no_active"/>
+                            <img src='{% static 'img/seq/点击0028.png' %}' class="click_no_active"/>
+                        </div>
+                        <div style="float: left;margin-left: 12px;">
+							<span id="How"
+                                  style="font-family: PingFangSC-Medium;text-decoration: underline;font-size: 24px;font-weight: normal;font-stretch: normal;line-height: 58px;letter-spacing: 0px;color: #ffffff; cursor: pointer">How
+								Hero works?</span>
+                        </div>
+                    </div>
+                    <div style="width:1000px;margin:auto;text-align: center;margin-top:40px;">
+						<span style="font-family: SourceHanSerifSC-Heavy;font-size: 74px;font-weight: normal;font-stretch: normal;line-height: 89px;letter-spacing: 0px;color: #FFFFFF;">Dependency
+							Management Issue Diagnosis</span>
+                    </div>
+                    <div style="width:1000px;margin:auto;text-align: center;,margin-top:20px;">
+						<span style="font-family: SourceHanSerifSC-Heavy;font-size: 22px;font-weight: normal;font-stretch: normal;line-height: 89px;letter-spacing: 0px;color: #ffffff;">Building
+							a healthy Golang ecosystem</span>
+                    </div>
+                    <div id="diagnosis_div"
+                         style="width:251px;height:82px;margin:auto;text-align: center;,margin-top:20px;border-radius: 20px;background-image: url({% static 'img/diagnosisButton.png' %});">
+                        <span id="start"
+                              style="font-family: PingFangSC-Regular;font-size: 24px;font-weight: normal;font-stretch: normal;line-height: 75px;letter-spacing: 0px;color: #ffffff; cursor: pointer">Diagnose</span>
+                    </div>
+                    <div style="position: fixed;right: 55px;bottom:55px;">
+                        <img style="position: relative;" src='{% static 'img/golang.png' %}'/>
+                    </div>
+                </div>
+            </li>
+            <!--Diagnosis-->
+            <li>
+                {#                 <div id="d_wait" style="text-align: center;position: absolute;margin-top:135px;margin:auto;width: 80%;height: 75%;min-height: 784px;background-color: rgba(111, 106, 100, 1);border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px;top: 0;visibility:hidden">#}
+                {#						<span style='color: rgba(243, 247, 26, 1);line-height: 600px;font-size: 66px;'>Coming soon!</span>#}
+                {#                 </div>#}
+
+                <div style="margin:auto;width: 1200px;height: auto;min-height: 784px;background-color: #236360;opacity: 0.8;border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px; ">
+                    <div id="d_wait"
+                         style="margin:0 auto;top:20%;text-align: center;position: absolute;width: 1080px;height: 535px;background-color: rgba(255, 255, 255, 1);border-radius: 10px; visibility:hidden">
+                        <div class="loader loader-3">
+                            <div class="dot dot1">h</div>
+                            <div class="dot dot2">e</div>
+                            <div class="dot dot3">r</div>
+                            <div class="dot dot4">o</div>
+                            <div style="color: black;margin-top: 30%;margin-left:4%;font-size:60%;font-weight: bold;font-family: Tahoma"> Testing is underway, please wait a moment!</div>
+                        </div>
+                    </div>
+                    <div style="width: 32px;height: 32px;background-color: #ffffff;border-radius: 24px;float: right;margin-right: -49px;margin-top: -31px;">
+                        <img style="width:32px;height: 32px;" src="{% static 'img/questionMark.png' %}"/>
+                    </div>
+                    <div style="width:100%;height:44px">
+                        <div style="float:left;margin-left:40px;">
+                            <label>
+                                <span style="font-family: PingFangSC-Regular;font-size: 18px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Project name</span>
+                            </label>
+                            <input id="d_repo" type="text"
+                                   style="margin-left: 10px;width: 234px;height: 44px;font-size: 18px;background-color: #ffffff;border-radius: 8px;border: solid 1px #ededed;"/>
+                        </div>
+                        <div style="float:left;margin-left:4%;">
+                            <label>
+                                <span style="font-family: PingFangSC-Regular;font-size: 18px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Version/Hash Commit ID</span>
+                            </label>
+                            <input id="d_version" type="text"
+                                   style="margin-left: 10px;width: 234px;height: 44px;font-size: 18px;background-color: #ffffff;border-radius: 8px;border: solid 1px #ededed;"/>
+                        </div>
+                        <div class="d_buttion" id="start_diagnosis_btn"
+                             style="float:right;margin-right:40px;width: 100px;height: 44px;background-color: #328E75;border-radius: 8px;text-align: center;cursor:pointer;">
+                            <span style="font-family: PingFangSC-Regular;font-size: 16px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Start</span>
+                        </div>
+                    </div>
+                    <div id="diagnosis_model"
+                         style="margin: auto;width: 100%;height: 52%;background-color: #f2f4f7;border-radius: 8px;margin-top: 40px;">
+                        <div style="width:100%;height:9%;margin:auto;text-align: center;padding-top: 1%;">
+                            <span style="font-family: PingFangSC-Semibold;font-size: 18px;font-weight: normal;font-stretch: normal;letter-spacing: 0px;color: #36a450;">Dependency Model</span>
+                        </div>
+                        <div id="dependency-model" style="width:100%;height:300px;color: #000000;"></div>
+                    </div>
+                    <div style="width:100%;margin-top:10px;height:auto;min-height: 150px;">
+                        <div style="float:left;width: 511px;height: 144px;background-color: #052327;border-radius: 8px;">
+                            <div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
+                                <span style="line-height: 44px;">Root cause</span>
+                            </div>
+                            <div id="root_cause_div" style="width:100%;padding:15px;color: #000000;"></div>
+                        </div>
+                        <div style="float:right;width: 511px;height: 144px;background-color: #052327;border-radius: 8px;">
+                            <div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
+                                <span style="line-height: 44px;">Suggested solutions</span>
+                            </div>
+                            <div id="suggested_solution_div" style="width:100%;padding:15px;color: #000000;"></div>
+                        </div>
+                    </div>
+                    <div class="d_buttion"
+                         style="margin-bottom:10px;margin-top:10px;float:right;width: 219px;height: 40px;background-color: #328E75;border-radius: 8px;text-align: center;">
+                        <img style="position: relative;width: 16px;height: 16px;bottom: -2px;"
+                             src="{% static 'img/github.png' %}"/>
+                        <span style="font-family: PingFangSC-Semibold;font-size: 14px;font-weight: normal;font-stretch: normal;line-height: 40px;letter-spacing: 0px;color: #ffffff;cursor:pointer;"><a
+                                href="https://github.com/KateGo520/Hero"
+                                style="text-decoration: none">View on GitHub</a></span>
+                    </div>
+                </div>
+            </li>
+            <!--issue report-->
+            <li>
+                <table class="table" cellspacing="0" cellpadding="0">
+                    <caption class="tr_title td">Table Statistics of dependency management issues reported by HERO
+                    </caption>
+                    <caption class="tr_mark_01">
+                        <i><strong>Status 1</strong>:</i> Issues fixed using our suggestions;
+                        <i><strong>Status 2</strong>:</i> Issues under fixing using our suggestions;
+                        <i><strong>Status 3</strong>:</i> Issues confirmed, but fixing not decided;
+                        <i><strong>Status 4</strong>:</i> Issues fixed using other suggestions;
+                        <i><strong>Status 5</strong>:</i> Issues pending;
+                        <i>Issue ID <span style="color: red">♠</span>:</i> Migration to Go Modules conducted (desired);
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th class='th color table_width_ID'
+                            style='border-right: 1px solid #70C99E;border-bottom: 1px solid #70C99E;'>ID
+                        </th>
+                        <th class='th color table_width_ProjectName' style='border-bottom: 1px solid #70C99E'>Project
+                            Name
+                        </th>
+                        <th class='th color table_width_CommitID' style='border-bottom: 1px solid #70C99E'>Commit ID
+                        </th>
+                        <th class='th color table_width_LastUpdateTime' style='border-bottom: 1px solid #70C99E'>Last
+                            Update Time
+                        </th>
+                        <th class='th color table_width_IssueID' style='border-bottom: 1px solid #70C99E'>Issue ID</th>
+                        <th class='th color table_width_IssueType' style='border-bottom: 1px solid #70C99E'>Issue Type
+                        </th>
+                        <th class='th color table_width_IssueStatus' style='border-bottom: 1px solid #70C99E'>Issue
+                            Status
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="data" class="baseScroll">
+
+                    </tbody>
+                </table>
+            </li>
+            <!--Empirical Study Dataset-->
+            <li>
+                <table class="table04" border='1' cellspacing="0" cellpadding="0">
+                    <caption class="tr_title td">Detailed information of 151 collected DM issues used in the empirical
+                        study <a href="{% static 'files/EmpiricalStudy.xlsx' %}">
+                            <div class="Empirical_button">
+                                <span style="font-family: PingFangSC-Regular;font-size: 16px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Download</span>
+                            </div>
+                        </a>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th class='th color' colspan='3' style="border-bottom: 1px solid #70C99E">Issue Types</th>
+                        <th class='th color' colspan='2' style="border-bottom: 1px solid #70C99E">Fixing Solutions</th>
+                    </tr>
+                    <tr>
+                        <td class='table_font' colspan='3'
+                            style="border-bottom: 1px solid #70C99E; border-right: 1px solid #70C99E">
+                            <i><strong>Type A:</strong></i>&nbsp;&nbsp;DM issues incurred when projects in GOPATH depend
+                            on projects in Go Modules.<br/>
+                            <i><strong>Type B:</strong></i>&nbsp;&nbsp;DM issues incurred when projects using Go Modules
+                            depend on projects using GOPATH.<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>a:</strong></i>&nbsp;&nbsp;Version
+                            retention problems caused by indirect dependencies.<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>b:</strong></i>&nbsp;&nbsp;Dependent
+                            libraries are redirected or deleted.<br/>
+                            <i><strong>Type C:</strong></i>&nbsp;&nbsp;DM issues incurred when projects using Go Modules
+                            depend on projects also using Go Modules but not following<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SIV
+                            rules.<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>a:</strong></i>&nbsp;&nbsp;Lacking
+                            version suffixes like '/v2' at the end of module paths or import paths, although the
+                            concerned projects are<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v2+
+                            ones.<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>b:</strong></i>&nbsp;&nbsp;Version
+                            tags not following the format of MAJOR.MINOR.PATCH as required by the semantic versioning
+                            strategy.<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>c:</strong></i>&nbsp;&nbsp;Module
+                            paths in go.mod files are inconsistent with URLs associated with the concerned projects on
+                            their hosting<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sites.<br/>
+                        </td>
+                        <td class='table_font' colspan='2' style="border-bottom: 1px solid #70C99E">
+                            <i><strong>Solution 1:</strong></i>&nbsp;&nbsp;Projects in GOPATH migrate to Go
+                            Modules.<br/>
+                            <i><strong>Solution 2:</strong></i>&nbsp;&nbsp;Projects in Go Modules roll back to
+                            GOPATH.<br/>
+                            <i><strong>Solution 3:</strong></i>&nbsp;&nbsp;Changing the strategy of releasing v2+
+                            projects in Go Modules from major branch to major subdirectory.<br/>
+                            <i><strong>Solution 4:</strong></i>&nbsp;&nbsp;Maintaining v2+ libraries in Go Modules in
+                            downstream projects'Vendor directories rather than referencing them<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;via
+                            their virtual import paths.<br/>
+                            <i><strong>Solution 5:</strong></i>&nbsp;&nbsp;Using a replace directive with specific
+                            version information to avoid using problematic import paths in referencing<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libraries.<br/>
+                            <i><strong>Solution 6:</strong></i>&nbsp;&nbsp;Updating import paths for the libraries that
+                            have changed their hosting site names.<br/>
+                            <i><strong>Solution 7:</strong></i>&nbsp;&nbsp;Projects in Go Modules fix their
+                            configuration items to strictly follow SIV rules.<br/>
+                            <i><strong>Solution 8:</strong></i>&nbsp;&nbsp;Using a hash commit ID corresponding to a
+                            specific version to replace a problematic version number in<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referencing
+                            a library.<br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="th table04_width_ID color"
+                            style="border-bottom: 1px solid #70C99E;border-right: 1px solid #70C99E;">ID
+                        </th>
+                        <th class="th table04_width_IssueID color" style="border-bottom: 1px solid #70C99E">Issue ID
+                        </th>
+                        <th class="th table04_width_ProjectName color" style="border-bottom: 1px solid #70C99E">Project
+                            Name
+                        </th>
+                        <th class="th table04_width_IssueType color" style="border-bottom: 1px solid #70C99E">Issue
+                            Type
+                        </th>
+                        <th class="th table04_width_FixingStrategy color" style="border-bottom: 1px solid #70C99E">
+                            Fixing strategy
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="data02" class="baseScroll"></tbody>
+                </table>
+            </li>
+            <!--Benchmark Dataset-->
+            <li>
+                <table class="table03" border="1" cellspacing="0" cellpadding="0">
+                    <caption class="tr_title td">Detailed information of 132 collected DM issues used in the
+                        benchmark dataset<a href="{% static 'files/GroundTruthDataset.zip' %}">
+                            <div class="Empirical_button">
+                                <span style="font-family: PingFangSC-Regular;font-size: 16px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Download</span>
+                            </div>
+                        </a>
+                    </caption>
+                    <caption class="miss_td"><span style="color: red; background-color: yellow;">Note：</span><span
+                            style="color:black;background-color: yellow">missed cases</span></caption>
+                    <thead>
+                    <tr>
+                        <th class="th table03_width_ID color"
+                            style="border-bottom: 1px solid #70C99E; border-right: 1px solid #70C99E;">ID
+                        </th>
+                        <th class="th table03_width_IssueID color" style="border-bottom: 1px solid #70C99E">Issue ID
+                        </th>
+                        <th class="th table03_width_ProjectName color" style="border-bottom: 1px solid #70C99E">Project
+                            Name
+                        </th>
+                        <th class="th table03_width_DetectedVersion color" style="border-bottom: 1px solid #70C99E">
+                            Detected Version
+                        </th>
+                        <th class="th table03_width_IssueType color" style="border-bottom: 1px solid #70C99E">Issue
+                            Type
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="data03" class="baseScroll">
+                    </tbody>
+                </table>
+            </li>
+            {#            <li></li>#}
+            {#            <li></li>#}
+            <!--About-->
+            <li>
+                <div style="margin:auto;width: 1200px;height: 90%;min-height: 784px;background-color: rgba(44,96,45,0.7);border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px;">
+                    <div class="left_menu" style="float:left;height:95%;width:33%">
+                        <ul>
+                            <li>
+                                <div id="about_net_div" class="about_module about_active"
+                                     style="padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 137px;border: 2px solid #16a085;">
+                                    <div style="height:60px;width:100%;float:left;">
+                                        <div style="float:left;">
+                                            <img style="width:50px;" src="{% static 'img/net.png' %}"/>
+                                        </div>
+                                        <div style="float:left;margin-left:10px;">
+                                            <span style="line-height: 50px;color:#16a085;font-weight: 700;">Constructing dependency model</span>
+                                        </div>
+                                    </div>
+                                    <div style="width:100%;float:left;">
+                                        <span style="font-size: 15px;">Hero extracts dependencies among Golang projects and their library-referencing modes</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="about_bug_div" class="about_module"
+                                     style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 193px;border: 2px solid #16a085;">
+                                    <div style="height:60px;width:100%;float:left;">
+                                        <div style="float:left;">
+                                            <img style="width:50px;" src="{% static 'img/bug.png' %}"/>
+                                        </div>
+                                        <div style="float:left;margin-left:10px;width:240px;">
+                                            <span style="line-height: 23px;color:#16a085;font-weight: 700;">Detecting dependency Management (DM) issues</span>
+                                        </div>
+                                    </div>
+                                    <div style="width:100%;float:left;">
+                                        <span style="font-size: 15px;">Hero focuses on detecting DM issues that have not yet manifested, but would probably happen when the concerned projects have their upstream or downstream projects upgraded</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="about_sol_div" class="about_module"
+                                     style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 153px;border: 2px solid #16a085;">
+                                    <div style="height:60px;width:100%;float:left;">
+                                        <div style="float:left;">
+                                            <img style="width:50px;" src="{% static 'img/sol.png' %}"/>
+                                        </div>
+                                        <div style="float:left;margin-left:10px;">
+                                            <span style="line-height: 50px;color:#16a085;font-weight: 700;">Customizing fixing suggestions</span>
+                                        </div>
+                                    </div>
+                                    <div style="width:100%;float:left;">
+                                        <span style="font-size: 15px;">HERO suggests applicable solutions to developers by customizing the template with potential impact analysis</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="about_li"
+                         style="border-radius: 10px;float: right;height: 95%;width: 60%;border: 2px solid #fff;background-color: #00000066; padding: 1%;">
+                        <ul>
+                            <li class="bb">
+                                        <span style="font-family: Palatino Linotype">
+                                            The dependency model <i>D</i>(<i>P</i><sub><i>v</i></sub>) for version <i>v</i> of a project P is a 3-tuple (<i>P</i><i>r</i>, <i>D</i><i>s</i>, <i>U</i><i>s</i>):<br/>
+                                            <i>1.&nbsp;&nbsp;&nbsp;&nbsp;Pr</i> = <i>(ip, md, t, vd)</i> records the information of the current project.<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>ip: P</i><sub><i>v</i></sub><i>'</i>s declared module path;<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>md: P</i><sub><i>v</i></sub><i>'</i>s library-referencing mode (<span
+                                                style="font-family: Consolas">GOPATH or Go Modules</span>);<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>t:</i> whether <i>P</i><sub><i>v</i></sub> depends on any DM tool (yes or no);<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>vd:</i> a collection of import paths (set of URLs) referencing those upstream &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libraries that are maintained in <i>P</i><sub><i>v</i></sub><i>'</i>s Vendor directory but cannot be found<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in the repositories pointed to by URLs (e.g., due to removal or renaming);<br/>
+                                            <i>2.&nbsp;&nbsp;&nbsp;&nbsp;Ds = </i>{<i>dp<sub>1</sub></i>&nbsp;, <i>dp<sub>2</sub></i>&nbsp;, · · · , <i>dp<sub>n</sub></i>} is a collection of <i>P<sub>v</sub>'</i>s downstream projects <i>dp<sub>i</sub></i> , where<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>dp<sub>i</sub> = (v<sub>i ,</sub> ip<sub>i ,</sub> md<sub>i ,</sub> t<sub>i</sub>)</i> .<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>v<sub>i</sub></i>: <i>dp<sub>i</sub>'</i>s latest version number;<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>ip<sub>i</sub></i>: <i>dp<sub>i</sub>'</i>s declared module path;<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>md<sub>i</sub></i>: <i>dp<sub>i</sub>'</i>s library-referencing mode (<span
+                                                style="font-family: Consolas">GOPATH or Go Modules</span>);<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>t<sub>i</sub></i>: <i>whether P<sub>v</sub></i> depends on any DM tool (yes or no);<br/>
+                                            <i>3.&nbsp;&nbsp;&nbsp;&nbsp;Us = </i>{<i>up<sub>1</sub> , up<sub>2</sub> , · · · , up<sub>n</sub></i>}&nbsp;&nbsp;is a collection of <i>P<sub><i>v</i></sub>'</i>s upstream projects <i>up<sub>i</sub></i>&nbsp;, where<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>up<sub>i</sub> = (v<sub>i,</sub> ip<sub>i,</sub> md<sub>i,</sub> S<sub>i,</sub> I<sub>i</sub>)</i>.<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>v<sub>i</sub></i>: <i>up<sub>i</sub>'</i>s latest version number;<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>ip<sub>i</sub></i>: <i>up<sub>i</sub>'</i>s declared module path;<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>md<sub>i</sub></i>: <i>up<sub>i</sub>'</i>s library-referencing mode (<span
+                                                style="font-family: Consolas">GOPATH or Go Modules</span>);<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>S<sub>i</sub></i>: If <i>up<sub>i</sub></i>&nbsp;&nbsp;is a <i>v</i>2+ project in <span
+                                                style="font-family: Consolas">Go Modules</span>, field <i>S<sub>i</sub></i>&nbsp;denotes whether it is released<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by the major branch strategy (yes or no), implying whether <i>ip<sub>i</sub></i>&nbsp;&nbsp;is a virtual &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import path;<br/>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>I<sub>i</sub></i>: If both projects <i>up<sub>i</sub></i>&nbsp;and <i>P<sub>v</sub></i>&nbsp;are in Go Modules, field <i>I<sub>i</sub></i>&nbsp;&nbsp;denotes whether upi<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is transitively introduced into <i>P<sub>v</sub></i>&nbsp;&nbsp;by any project in <span
+                                                style="font-family: Consolas">GOPATH</span>
+                                        </span>
+                            </li>
+                            <li>
+                                <div class="baseScroll" style="width:100%;height:525px;overflow-y: scroll">
+                                    <span style="font-size: 17px"><strong>Scenarios</strong> for which HERO reports issues: </span><br/>
+                                    <span style="font-family: Palatino Linotype">
+                                                <span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>Type A</strong></i>:<br/>
+                                                <img src="{% static 'img/a.png' %}" width="90%"><br/>
+                                                Figure (a) shows a scenario, where a module-unaware project <i>P<sub>v</sub></i> references a specific
+                                                version of its upstream project <i>up<sub>a</sub></i> in <span
+                                            style="font-family: Consolas">Go Modules</span>. This version is older than <i>up<sub>a</sub><sup>’</sup></i>s
+                                                latest version, which newly introduces another upstream project <i>up<sub>b</sub></i> in <span
+                                            style="font-family: Consolas">Go Modules</span>
+                                                with a <i>v2+</i> version released using the major branch strategy. Build errors do not occur
+                                                in <i>P<sub>v</sub></i> when it references <i>up<sub>a</sub></i><sup>’</sup>s old version. However, if <i>P<sub>v</sub></i> updates <i>up<sub>a</sub></i> to reference the
+                                                latest version, it will not be able to recognize <i>up<sub>b</sub><sup>’ </sup></i> s virtual import path. When seeing
+                                                such a possibility, Hero reports a warning of <i><strong>Type A</strong></i> issue for <i>P<sub>v</sub></i> .
+                                                <br/><br/>
+                                                <span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>Type B.1</strong></i>:<br/>
+                                                <img src="{% static 'img/b.png' %}" width="90%"><br/><br/>
+                                                Figure (b) shows a scenario, where project <i>P<sub>v</sub></i> in <span
+                                            style="font-family:Consolas">Go Modules</span> transitively references a
+                                                <i>v2+</i> upstream project <i>up<sub>b</sub></i> in <span
+                                            style="font-family:Consolas ">Go Modules</span> (released by the major branch strategy)
+                                                through another module-unaware project <i>up<sub>a</sub></i> in <span
+                                            style="font-family: Consolas">GOPATH</span>. Since <span
+                                            style="font-family: Consolas">GOPATH</span> and <span
+                                            style="font-family: Consolas">Go
+                                                Modules</span> interpret import paths differently, <i>up<sub>a</sub></i> would use <i>up<sub>b</sub><sup>’</sup>s</i> latest version (e.g.,
+                                                v2.0.0), while <i>P<sub>v</sub></i> would use <i>up<sub>b</sub><sup>’</sup></i>s old <i>v0/v1</i> version, causing inconsistencies. Thus,
+                                                Hero reports a warning of <i><strong>Type B.1</strong></i> issue for <i>P<sub>v</sub></i> .
+                                                <br/><br/>
+                                                <span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Type B.2</i>:<br/>
+                                                <img src="{% static 'img/c.png' %}" width="90%"><br/>
+                                                Figure (c) shows a scenario, where project <i>P<sub>v</sub></i> in <span
+                                            style="font-family: Consolas">GOPATH</span> references an upstream
+                                                project upa maintained only in its Vendor directory (i.e., <i>up<sub>a</sub></i> has already been deleted
+                                                or relocated). No build errors occur when <i>P<sub>v</sub></i> has no downstream projects in <span
+                                            style="font-family: Consolas">Go
+                                                Modules</span>. However, if <i>P<sub>v</sub></i> has such downstream projects, the latter would fetch <i>up<sub>a</sub></i> via its import path (i.e., hosting repository) rather than from <i>P<sub>v</sub><sup>’</sup></i>s Vendor directory,
+                                                causing build errors due to failing to fetch <i>up<sub>a</sub></i> . Thus, Hero reports a warning of <i><strong>Type
+                                                B.2</strong></i> issue for <i>P<sub>v</sub></i> .
+                                                <br/><br/>
+                                                <span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><strong>Type C</strong></i>:<br/>
+                                                <img src="{% static 'img/d.png' %}" width="90%"><br/>
+                                                Figure (d) shows a scenario, where project <i>P<sub>v</sub></i> in <span
+                                            style="font-family: Consolas">Go Modules</span> violates SIV rules. The
+                                                violation may not introduce build errors when <i>P<sub>v</sub></i> has no downstream projects in <span
+                                            style="font-family: Consolas">Go
+                                                Modules</span>. However, build errors would occur if such projects exist in future. Thus,
+                                                Hero reports a warning of <i><strong>Type C</strong></i> issue for <i>P<sub>v</sub></i> .
+                                                <br/><br/>
+                                                <span style="font-size: 20px"><strong>Detection process:</strong></span><br/>
+                                                <img style="background-color: white" src="{% static 'img/算法.png' %}"
+                                                     width="100%"><br/>
+                                                <span style="font-family: Palatino Linotype;font-size: 12px;">
+                                                    <span style="font-family:等线;color: red;font-size: 15px"><strong>Note</strong></span>:<br/>
+                                                    1. <i>REST APIs "<span style="color: #36A450">repository_url</span>" and "<span
+                                                        style="color: #36A450">code_search_url</span>" are defined by</i>
+                                                    GitHub Rest API v3<br/>&nbsp;&nbsp;&nbsp;&nbsp;standards(https://developer.github.com/v3/) ;<br/>
+                                                    2. <i>Si</i> denotes whether upi is released by the major branch strategy (<span
+                                                        style="font-family: Consolas">yes</span> or <span
+                                                        style="font-family: Consolas">no</span>)<br/>
+                                                    3. <i>Ii</i> denotes whether upi is transitively introduced into Pv by any project in GOPATH (<span
+                                                        style="font-family: Consolas">yes</span> or <span
+                                                        style="font-family: Consolas">no</span>)<br/>
+                                                    4. <i>vd</i> denotes a collection of import paths (set of URLs) referencing those upstream libraries that are maintained in<br/>&nbsp;&nbsp;&nbsp;&nbsp;<i>P<sub>v</sub><sup>’</sup></i>s Vendor directory but cannot be found in the repositories pointed to by URLs (e.g., due to removal or<br/>&nbsp;&nbsp;&nbsp;&nbsp;renaming);
+                                                </span>
+
+                                            </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="baseScroll" style="width:100%;height:525px;overflow-y: scroll">
+                                            <span style="font-family: Palatino Linotype">
+                                                For each detected DM issue, Hero suggests all applicable solutions to developers by
+                                                customizing the template with potential impact analysis based on the associated
+                                                dependency model.<br/>
+                                                Templates of customized fixing suggestions for three types of DM
+                                                issues are described as follows, where <i>P<sub>v</sub></i> is the project under analysis; <span
+                                                    style="color: #01CF45"><i><strong>mbs</strong></i></span> is short for the major branch strategy;
+                                                <span style="color: #01CF45"><i><strong>mss</strong></i></span> is short for the major subdirectory strategy; <i><strong>"S1-8"</strong></i> denote fixing solutions 1-8; <span
+                                                    style="color: #70C99E"><i><strong>ab1-3</strong></i></span> and <span
+                                                    style="color: red"><i><strong>uc1-4</strong></i></span> correspond to the
+                                                additional benefits and undesired consequences of fixing solutions; <span
+                                                    style="background-color: #02A32F">info</span> is the customized information by Hero.<br/>
+                                                <br/><br/>
+                                                <span style="color: red"><u><i><strong>Fixing Type A DM issues</strong></i></u></span><br/>
+                                                <strong>S1→Let</strong> <i>P<sub>v</sub></i> migrate to <span
+                                                    style="font-family: Consolas">Go Modules</span><br/>
+                                                <span style="color: #70C99E"><i><strong>ab1</strong></i></span>: Promoting the migration to <span
+                                                    style="font-family: Consolas">Go Modules</span>;<br/>
+                                                <span style="color: red"><i><strong>uc1</strong></i></span>: Breaking compatibility with <i>P<sub>v</sub><sup>’</sup></i> s downstream module-unaware projects:
+                                                <span style="background-color:#02A32F "><i>dp1 , dp2 ,…, dpn ∈ Ds </i>(in GOPATH and using DM tools);</span><br/>
+                                                <strong>S2→Let</strong> <i>P<sub>v</sub><sup>’</sup></i> s <i>v2+</i> upstream project <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span> (in <span
+                                                    style="font-family: Consolas">Go Modules</span> and released by <i>mbs</i>) roll back to <span
+                                                    style="font-family: Consolas">GOPATH</span><br/>
+                                                <span style="color: #70C99E"><i><strong>ab2</strong></i></span>: Supporting <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span><i><sup>’</sup></i> s downstream module-unaware projects;<br/>
+                                                <span style="color: red"><i><strong>uc2</strong></i></span>: Hindering the migration to the ecosystem;<br/>
+                                                <strong>S3→Let</strong> <i>P<sub>v</sub><sup>’</sup></i>s <i>v2+</i> upstream project <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span> in <span
+                                                    style="font-family: Consolas">Go Modules</span> change its releasing strategy from <i>mbs</i> to <i>mss</i><br/>
+                                                <span style="color: #70C99E"><i><strong>ab2</strong></i></span>: Supporting <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span><i><sup>’</sup></i> s downstream module-unaware projects;<br/>
+                                                <span style="color: red"><i><strong>uc3</strong></i></span>: Increasing maintenance efforts;<br/>
+                                                <strong>S4→Let</strong> <i>P<sub>v</sub></i> maintain <i>v2+</i> upstream project <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span> (in <span
+                                                    style="font-family: Consolas">Go Modules</span>, released by <i>mbs</i>) in <i>Vendor</i> directory
+                                                <span style="color: red"><i><strong>uc3</strong></i></span>: Increasing maintenance efforts;<br/>
+                                                <span style="color: red"><i><strong>uc4</strong></i></span>: Introducing potential DM issues in future;<br/>
+                                                <br/><br/>
+                                                <span style="color: red"><u><i><strong>Fixing Type B.1 DM issues</strong></i></u></span><br/>
+                                                <strong>S5→Let</strong> <i>P<sub>v</sub></i> reference upstream project <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span> using a replace directive with <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i><i><sup>’</sup></i> s latest version number</span>
+                                                to avoid using its problematic import path<br/>
+                                                <span style="color: red"><i><strong>uc3</strong></i></span>: Increasing maintenance efforts;<br/>
+                                                <span style="color: red"><i><strong>Note</strong></i></span>: <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span> is a <i>v2+</i> project in <span
+                                                    style="font-family: Consolas">Go Modules</span> (release by <i>mbs</i>), and transitively referenced by <i>P<sub>v</sub></i> through
+                                                another module-unaware upstream project<br/>
+                                                <br/><br/>
+                                                <span style="color: red"><u><i><strong>Fixing Type B.2 DM issues</strong></i></u></span><br/>
+                                                <strong>S6→Let</strong> <i>P<sub>v</sub></i> update import path for its upstream project <i>up<sub>i</sub></i> that has changed its hosting site names<br/>
+                                                <span style="color: red"><i><strong>ab3</strong></i></span>: Supporting <i>P<sub>v</sub><sup>’</sup></i>s downstream module-aware projects: <span
+                                                    style="background-color: #02A32F"><i>dp1, dp2,…, dpn ∈ Ds</i>(in Go Moules);</span><br/>
+                                                <br/><br/>
+                                                <span style="color: red"><u><i><strong>Fixing Type C DM issues</strong></i></u></span><br/>
+                                                <strong>S2→Let</strong> <i>P<sub>v</sub></i> roll back to <span
+                                                    style="font-family: Consolas">GOPATH</span><br/>
+                                                <span style="color: #70C99E"><i><strong>ab2</strong></i></span>: Supporting <i>P<sub>v</sub><sup>’</sup></i> s downstream module-unaware projects:
+                                                <span style="background-color: #02A32F"><i>dp<sub>1</sub>, dp<sub>2</sub>,…, dp<sub>n</sub> ∈ Ds</i></span> (in GOPATH and using DM tools);<br/>
+                                                <span style="color: red"><i><strong>uc2</strong></i></span>: Hindering the migration to the ecosystem;<br/>
+                                                <strong>S5→Let</strong> <i>P<sub>v</sub><sup>’</sup></i> s downstream projects <i>dp<sub>i</sub></i> (in Go Modules) use a replace directive with version number
+                                                <i>v</i> to avoid using <i>P<sub>v</sub><sup>’</sup></i> s problematic import path<br/>
+                                                <span style="color: red"><i><strong>uc3</strong></i></span>: Increasing maintenance efforts;<br/>
+                                                <strong>S7→Let</strong> <i>P<sub>v</sub></i> fix its configuration items to strictly follow SIV rules<br/>
+                                                <span style="color: #70C99E"><i><strong>ab3</strong></i></span>: Supporting <i>P<sub>v</sub><sup>’</sup></i>s downstream module-aware projects: <span
+                                                    style="background-color: #02A32F"><i>dp1, dp2,…, dpn ∈ Ds</i> (in Go Moules);</span><br/>
+                                                <span style="color: red"><i><strong>uc1</strong></i></span>: Breaking compatibility with <i>P<sub>v</sub><sup>’</sup></i>s downstream module-unaware projects:
+                                                <span style="background-color: #02A32F"><i>dp<sub>1</sub>, dp<sub>2</sub>,…, dp<sub>n</sub> ∈ Ds</i> (in GOPATH and using DM tools);</span><br/>
+                                                <span>S8→Let</span> <i>P<sub>v</sub><sup>’</sup></i>s downstream projects <span
+                                                    style="background-color: #02A32F"><i>up<sub>i</sub></i></span> (in <span
+                                                    style="font-family: Consolas">Go Modules</span>) use a hash commit ID corresponding to version <i>P<sub>v</sub></i>
+                                                to replace its problematic version number<br/>
+                                                <span style="color: red"><i><strong>uc3</strong></i></span>: Increasing maintenance efforts.<br/>
+                                            </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+<script src="{% static 'js/diagnosis.js' %}"></script>
+<script src="{% static 'js/about.js' %}"></script>
+<script src="{% static 'js/aa.js' %}"></script>
+<script src="{% static 'js/data.js' %}"></script>
+<script src="{% static 'js/study.js' %}"></script>
+<script src="{% static 'js/GT.js' %}"></script>
+</html>

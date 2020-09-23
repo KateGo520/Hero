@@ -1,0 +1,65 @@
+.table{
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    text-align: center;
+    border: 3px solid #70C99E;
+    border-radius: 10px;
+}
+.tr_mark_01{
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 15px;
+}
+.tr_mark_02{
+    text-align: left;
+    font-size: 15px;
+}
+.tr_title{
+    margin: 0 auto;
+    /*background-color: rgba(5,12,36,0.4);*/
+    width: 100%;
+    text-align: center;
+    padding-bottom:5px;
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 2.5%;
+}
+/*字体颜色*/
+.th{
+    text-align: center;
+}
+/*字体颜色*/
+.td{
+    text-align: center;
+}
+/*字体大小*/
+.td_font{
+    text-align: center;
+    font-size: 15px;
+}
+/*第二列表格的宽度*/
+.td_width{
+    width: 40%;
+    height: auto;
+}
+/*状态列*/
+.status_width{
+    width: 15%;
+    height: auto;
+}
+
+.Empirical_button{
+	float: right;
+	height: 44px;
+    width: 100px;
+	border-radius: 8px;
+	text-align: center;
+	background-color:#236360;
+	opacity: 0.9;
+    cursor: pointer;
+}
+
+.color{
+    color: yellow;
+}

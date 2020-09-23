@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<script type="text/javascript" src="{% static 'js/diagnosis.js' %}"></script>
+	
+	<div style="margin:auto;width: 1200px;margin-top: 40px;height: 90%;min-height: 784px;background-color: rgba(44,96,45,0.7);border-radius: 10px;padding: 40px;padding-left: 60px;
+    padding-right: 60px;padding-bottom:10px;">
+		<div style="width: 32px;
+	height: 32px;
+	background-color: #ffffff;border-radius: 24px;float: right;margin-right: -49px;
+    margin-top: -31px;">
+			<img style="width:32px;height: 32px;" src="{% static 'img/questionMark.png' %}"/>
+		</div>
+		<div style="width:100%;height:44px">
+			<div style="float:left;margin-left:40px;">
+				<label>
+					<span style="font-family: PingFangSC-Regular;font-size: 16px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Project name</span>
+				</label>
+				<input type="text" style="margin-left: 10px;width: 234px;height: 44px;background-color: #ffffff;border-radius: 8px;border: solid 1px #ededed;" />
+			</div>
+			<div style="float:left;margin-left:7%;">
+				<label>
+					<span style="font-family: PingFangSC-Regular;font-size: 16px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Version/Hash Commit ID</span>
+				</label>
+				<input type="text" style="margin-left: 10px;width: 234px;height: 44px;background-color: #ffffff;border-radius: 8px;border: solid 1px #ededed;" />
+			</div>
+			<div id="start_diagnosis_btn" style="float:right;margin-right:40px;width: 100px;height: 44px;background-color: #36a450;border-radius: 8px;text-align: center;">
+				<span style="font-family: PingFangSC-Regular;font-size: 16px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Start</span>
+			</div>
+		</div>
+		<div id="diagnosis_model" style="margin: auto;width: 100%;height: 52%;background-color: #f2f4f7;border-radius: 8px;margin-top: 40px;">
+			<div style="width:100%;height:9%;margin:auto;text-align: center;padding-top: 1%;">
+				<span style="font-family: PingFangSC-Semibold;font-size: 18px;font-weight: normal;font-stretch: normal;letter-spacing: 0px;color: #36a450;">Dependency Model</span>
+			</div>
+			<div style="width:100%;height:90%;"></div>
+		</div>
+		<div style="width:100%;margin-top:10px;height:28%;">
+			<div style="float:left;width: 511px;height: 100%;background-color: #052327;border-radius: 8px;">
+				<div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
+					<span style="line-height: 44px;">Root cause</span>
+				</div>
+				<div id="root_cause_div" style="width:100%;padding:15px;"></div>
+			</div>
+			<div style="float:right;width: 511px;height: 100%;background-color: #052327;border-radius: 8px;">
+				<div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
+					<span style="line-height: 44px;">Suggested solutions</span>
+				</div>
+				<div id="suggested_solution_div" style="width:100%;padding:15px;"></div>
+			</div>
+		</div>
+		<div style="margin-bottom:10px;margin-top:10px;float:right;width: 219px;height: 40px;background-color: #36a450;border-radius: 8px;text-align: center;">
+			<img style="position: relative;width: 16px;height: 16px;bottom: -2px;" src="{% static 'img/github.png' %}" />
+			<span style="font-family: PingFangSC-Semibold;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 40px;
+	letter-spacing: 0px;
+	color: #ffffff;">View on GitHub</span>
+		</div>
+	</div>
+</html>

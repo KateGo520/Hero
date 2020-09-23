@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ISSUE REPORT</title>
+    <link rel="stylesheet" href="{% static 'css/data.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pageLayout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pushy-buttons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/homePage.css' %}">
+    <link rel='stylesheet' href="{% static 'css/Diagnosis.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+</head>
+
+<body>
+<div class="contain">
+    <div class="option-list">
+        <ul>
+            <li class="aa">Hero</li>
+            <li>Diagnosis</li>
+            <li>Issue report</li>
+            <li>Empirical Study Dataset</li>
+            <li>Benchmark Dataset</li>
+            <li>Ecosystem</li>
+            <li>Demo</li>
+            <li>About</li>
+        </ul>
+    </div>
+    <div class="card-list">
+        <ul class="total_ul">
+            <!--Hero-->
+            <li class="aa total_li">
+                <div class="block_first">
+                    <div class="first_font">
+                        Dependency Management Issue Diagnosis<br/>
+                        <span class="second_font">Building a healthy Golang ecosystem</span>
+                    </div>
+                    <a class="btn btn--lg btn--gray" href="#" >Diagnose</a>
+                    <div class="hand">
+                        <p style="display:inline-block;background:url({% static 'img/手指.png' %}) no-repeat left 10px;padding-left:40px;">
+                            <a href="#" style="color: red; text-decoration: none;">How Hero work?</a>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <!--Diagnosis-->
+            <li class="total_li">
+                <div class="Diagnosis_first">
+                    <div class="Diagnosis_top">
+                        Project name <input type="text" class="Diagnosis_input"/>
+                        <span style="margin-left: 2.5%;">Version/Hash Commit ID&nbsp;</span>
+                        <input type="text" class="Diagnosis_input"/>
+                        <div class="circle_green" style="margin-left: 10%;">?</div>
+                        <div class="circle_red" style="margin-left: 3%;">Start</div>
+                    </div>
+                    <div class="Diagnosis_second_blackground">
+                        Dependency Model
+                        <div class="Diagnosis_second_first"><img src="{% static 'img/关系图.png' %}"
+                                                                 style="margin-top: 1%"></div>
+                    </div>
+                    <div>
+                        <div class="Diagnosis_third_blackground">
+                            <div class="Diagnosis_third_first">Root cause</div>
+                            <div class="Diagnosis_third_second"></div>
+                        </div>
+                        <div class="Diagnosis_third_blackground" style="margin-left: 2.5%;">
+                            <div class="Diagnosis_third_third">Suggested &nbsp;solutions</div>
+                            <div class="Diagnosis_third_fourth"></div>
+                        </div>
+                    </div>
+                    <button class="Diagnosis_button">View on GitHub</button>
+                </div>
+            </li>
+            <!--Issue report-->
+            <li class="total_li">
+                <table class="table" id="data" border='1' cellspacing="0" cellpadding="0">
+                    <caption class="tr_title td">Table Statistics of dependency management issues reported by HERO
+                    </caption>
+                    <caption class="tr_mark_01">
+                        <strong>Status 1</strong>: Issues fixed using our suggestions;
+                        <strong>Status 2</strong>: Issues under fixing using our suggestions;
+                        <strong>Status 3</strong>: Issues confirmed, but fixing not decided;
+                        <strong>Status 4</strong>: Issues fixed using other suggestions;
+                        <strong>Status 5</strong>: Issues pending;
+                        Issue ID <span style="color: red">♠</span>: Migration to Go Modules conducted (desired);
+                    </caption>
+                </table>
+            </li>
+            <!--Empirical Study Dataset-->
+            <li class="total_li">
+                <table class="table" id="data02" border='1' cellspacing="0" cellpadding="0">
+                    <caption class="tr_title td">Detailed information of 151 collected DM issues used in the empirical
+                        study <a href="{% static 'files/EmpiricalStudy.xlsx' %}">
+                            <button type="button" class="Empirical_button">Download</button>
+                        </a>
+                    </caption>
+                </table>
+            </li>
+            <!--Benchmark Dataset-->
+            <li class="total_li">
+                <table class="table03"  border="1" cellspacing="0" cellpadding="0">
+                    <caption class="tr_title td">Detailed information of 132 collected DM issues used in the
+                        benchmark dataset<a href="{% static 'files/BenchmarkDataset.xlsx' %}">
+                            <button type="button" class="Empirical_button">Download</button>
+                        </a>
+                    </caption>
+                    <caption class="miss_td"><span style="color: red; background-color: yellow">Note：</span><span style="background-color: yellow">missed cases</span></caption>
+                    <thead>
+                        <tr>
+                            <th class="th table_width_ID">ID</th>
+                            <th class="th table_width_IssueID">Issue ID</th>
+                            <th class="th table_width_ProjectName">Project Name</th>
+                            <th class="th table_width_DetectedVersion">Detected Version</th>
+                            <th class="th table_width_IssueType">Issue Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data03" class="baseScroll">
+                    </tbody>
+                </table>
+                <div class="text_link">
+                    <h3>Download Benchmark Dataset </h3>
+                    <a href="{% static 'files/GroundTruthDataset.zip' %}">Benchmark Dataset</a>
+                    <h3>Hero's Code Repository</h3>
+                    <a href="https://github.com/KateGo520/Hero">Hero</a>
+                </div>
+            </li>
+            <!--Ecosystem-->
+            <li class="total_li">Ecosystem</li>
+            <!--Demo-->
+            <li class="total_li">Demo</li>
+            <!--About-->
+            <li class="total_li">
+                <div style="margin:auto;width: 1200px;margin-top: 40px;height: 90%;min-height: 784px;background-color: rgba(44,96,45,0.7);border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px;">
+                    <div class="left_menu" style="float:left;height:95%;width:33%">
+                        <ul>
+                            <li>
+                                <div id="about_net_div" class="about_module about_active" style="padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 132px;border: 2px solid #16a085;">
+                                <div style="height:60px;width:100%;float:left;">
+                                    <div style="float:left;">
+                                        <img style="width:50px;" src="{% static 'img/net.png' %}"/>
+                                    </div>
+                                    <div style="float:left;margin-left:10px;">
+                                        <span style="line-height: 50px;color:#16a085;font-weight: 700;">Constructing dependency model</span>
+                                    </div>
+                                </div>
+                                <div style="width:100%;float:left;">
+                                    <span style="font-size: 15px;">Hero extracts dependencies among Golang projects and their library-referencing modes</span>
+                                </div>
+                            </div>
+                            </li>
+                            <li>
+                                <div id="about_bug_div" class="about_module" style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 188px;border: 2px solid #16a085;">
+                                <div style="height:60px;width:100%;float:left;">
+                                    <div style="float:left;">
+                                        <img style="width:50px;" src="{% static 'img/bug.png' %}"/>
+                                    </div>
+                                    <div style="float:left;margin-left:10px;width:240px;">
+                                        <span style="line-height: 23px;color:#16a085;font-weight: 700;">Detecting dependency Management (DM) issues</span>
+                                    </div>
+                                </div>
+                                <div style="width:100%;float:left;">
+                                    <span style="font-size: 15px;">Hero focuses on detecting DM issues that have not yet manifested, but would probably happen when the concerned projects have their upstream or downstream projects upgraded</span>
+                                </div>
+                            </div>
+                            </li>
+                            <li>
+                                <div id="about_sol_div" class="about_module"
+                                 style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 148px;border: 2px solid #16a085;">
+                                <div style="height:60px;width:100%;float:left;">
+                                    <div style="float:left;">
+                                        <img style="width:50px;" src="{% static 'img/sol.png' %}"/>
+                                    </div>
+                                    <div style="float:left;margin-left:10px;">
+                                        <span style="line-height: 50px;color:#16a085;font-weight: 700;">Customizing fixing suggestions</span>
+                                    </div>
+                                </div>
+                                <div style="width:100%;float:left;">
+                                    <span style="font-size: 15px;">HERO suggests applicable solutions to developers by customizing the template with potential impact analysis</span>
+                                </div>
+                            </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="about_li" style="border-radius: 10px;float: right;height: 95%;width: 60%;border: 2px solid #fff;background-color: #00000066; padding: 1%">
+                        <ul>
+                            <li class="bb">
+                                <span style="font-family: Palatino Linotype">
+                                    The dependency model <i>D</i>(<i>P</i><sub><i>v</i></sub>) for version <i>v</i> of a project P is a 3-tuple (<i>P</i><i>r</i>, <i>D</i><i>s</i>, <i>U</i><i>s</i>):<br/>
+                                    <i>1.&nbsp;&nbsp;&nbsp;&nbsp;Pr</i> = <i>(ip, md, t, vd)</i> records the information of the current project.<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>ip: P</i><sub><i>v</i></sub><i>'</i>s declared module path;<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>md: P</i><sub><i>v</i></sub><i>'</i>s library-referencing mode (<span style="font-family: Consolas">GOPATH or Go Modules</span>);<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>t:</i> whether <i>P</i><sub><i>v</i></sub> depends on any DM tool (yes or no);<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>vd:</i> a collection of import paths (set of URLs) referencing those upstream libraries that are <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maintained in <i>P</i><sub><i>v</i></sub><i>'</i>s Vendor directory but cannot be found in the repositories pointed to <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by URLs (e.g., due to removal or renaming);<br/>
+                                    <i>2.&nbsp;&nbsp;&nbsp;&nbsp;Ds = </i>{<i>dp<sub>1</sub>, dp<sub>2</sub>, · · · , dp<sub>n</sub></i>} is a collection of <i>P</i><sub>v</sub><i>'</i>s downstream projects <i>dp</i><sub>i,</sub> where <i>dp<sub>i</sub> = (v<sub>i,</sub> ip<sub>i,</sub> md<sub>i,</sub> t<sub>i</sub>)</i>.<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>v<sub>i</sub></i> : <i>dp<sub>i</sub>'</i>s latest version number;<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>ip<sub>i</sub></i> : <i>dp<sub>i</sub>'</i>s declared module path;<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>md<sub>i</sub></i> : <i>dp<sub>i</sub>'</i>s library-referencing mode (<span style="font-family: Consolas">GOPATH or Go Modules</span>);<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>t<sub>i</sub></i> : <i>whether P<sub>v</sub></i> depends on any DM tool (yes or no);<br/>
+                                    <i>3.&nbsp;&nbsp;&nbsp;&nbsp;Us = </i>{<i>up<sub>1,</sub> up<sub>2,</sub> · · · , up<sub>n</sub></i>}&nbsp;&nbsp;is a collection of <i>P<sub><i>v</i></sub>'</i>s upstream projects <i>up<sub>i</sub></i>&nbsp;, where <i>up<sub>i</sub> = (v<sub>i,</sub> ip<sub>i,</sub> md<sub>i,</sub> S<sub>i,</sub> I<sub>i</sub>)</i>.<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>v<sub>i</sub></i> : <i>up<sub>i</sub>'</i>s latest version number;<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>ip<sub>i</sub></i> : <i>up<sub>i</sub>'</i>s declared module path;<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>md<sub>i</sub></i> : <i>up<sub>i</sub>'</i>s library-referencing mode (<span style="font-family: Consolas">GOPATH or Go Modules</span>);<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>S<sub>i</sub></i> : If <i>up<sub>i</sub></i>&nbsp;&nbsp;is a <i>v</i>2+ project in <span style="font-family: Consolas">Go Modules</span>, field <i>S<sub>i</sub></i>&nbsp;denotes whether it is released by the major &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;branch strategy (yes or no), implying whether <i>ip<sub>i</sub></i>&nbsp;&nbsp;is a virtual import path;<br/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: Wingdings"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>I<sub>i</sub></i> : If both projects <i>up<sub>i</sub></i>&nbsp;and <i>P<sub>v</sub></i>&nbsp;are in Go Modules, field <i>I<sub>i</sub></i>&nbsp;&nbsp;denotes whether <i>up<sub>i</sub></i>&nbsp;&nbsp;is transitively &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;introduced into <i>P<sub>v</sub></i>&nbsp;&nbsp;by any project in <span style="font-family: Consolas">GOPATH</span>
+                                </span>
+                            </li>
+                            <li><strong>Scenarios</strong> for which HERO reports issues: <br/>
+                                <span style="font-family: Palatino Linotype">
+                                    <span style="font-family: Wingdings"></span><i>Type A</i>:
+                                </span>
+                            </li>
+                            <li>456</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+<script src="{% static 'js/about.js' %}"></script>
+<script src="{% static 'js/aa.js' %}"></script>
+<script src="{% static 'js/data.js' %}"></script>
+<script src="{% static 'js/study.js' %}"></script>
+<script src="{% static 'js/GT.js' %}"></script>
+</html>

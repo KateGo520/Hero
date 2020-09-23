@@ -1,0 +1,31 @@
+.head_menu {
+	float: right;
+	heigh: 65px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #FFFFFF;
+}
+
+.head_menu.active{
+	color: #36a450;
+}
+
+.head_menu span {
+	line-height: 65px;
+	font-family: PingFangSC-Regular;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.click_no_active {
+	display: none;
+}
+
+.click_active {
+	display: block;
+}
+
+.about_active {
+	background-color: #00000066;
+	-webkit-box-shadow: 0 0 15px rgba(0,113,241,1);
+}

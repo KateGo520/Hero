@@ -1,0 +1,20 @@
+.loader { margin:0 auto;top:0;display:inline-block;position: relative; width: 1080px; height: 535px; border-radius: 50%; display: inline-block; vertical-align: middle; font-size: 50px}
+
+/*LOADER-3*/
+
+.loader-3 .dot { width: 80px; height: 80px; background: #236360;opacity: 0.8; border-radius: 50px; position: absolute; top: calc(40% - 5px); font-weight:bolder; color: white;line-height: 80px;}
+.loader-3 .dot1 { left: 25%; -webkit-animation: dot-jump 0.5s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; animation: dot-jump 0.5s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; }
+.loader-3 .dot2 { left: 40%; -webkit-animation: dot-jump 0.5s 0.2s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; animation: dot-jump 0.5s 0.2s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; }
+.loader-3 .dot3 { left: 55%; -webkit-animation: dot-jump 0.5s 0.4s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; animation: dot-jump 0.5s 0.4s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; }
+.loader-3 .dot4 { left: 70%; -webkit-animation: dot-jump 0.5s 0.6s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; animation: dot-jump 0.5s 0.6s cubic-bezier(0.77, 0.47, 0.64, 0.28) alternate infinite; }
+
+ @keyframes dot-jump {
+ 0% {
+ -webkit-transform: translateY(0);
+ transform: translateY(0);
+}
+ 100% {
+ -webkit-transform: translateY(-15px);
+ transform: translateY(-15px);
+}
+}

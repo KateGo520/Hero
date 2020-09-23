@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<script type="text/javascript" src="{% static 'js/about.js' %}"></script>
+	
+	<div style="margin:auto;width: 1200px;margin-top: 40px;height: 90%;min-height: 784px;background-color: rgba(44,96,45,0.7);border-radius: 10px;padding: 40px;padding-left: 60px;
+    padding-right: 60px;padding-bottom:10px;">
+		<div style="float:left;height:95%;width:33%">
+			<div id="about_net_div" class="about_module about_active" style="padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 132px;border: 2px solid #16a085;">
+				<div style="height:60px;width:100%;float:left;">
+					<div style="float:left;">
+						<img style="width:50px;" src="{% static 'img/net.png' %}" />
+					</div>
+					<div style="float:left;margin-left:10px;">
+						<span style="line-height: 50px;color:#16a085;font-weight: 700;">Constructing dependency model</span>
+					</div>
+				</div>
+				<div style="width:100%;float:left;">
+					<span style="font-size: 15px;">Hero extracts dependencies among Golang 
+projects and their library-referencing modes</span>
+				</div>
+			</div>
+			
+			<div id="about_bug_div" class="about_module" style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 188px;border: 2px solid #16a085;">
+				<div style="height:60px;width:100%;float:left;">
+					<div style="float:left;">
+						<img style="width:50px;" src="{% static 'img/bug.png' %}" />
+					</div>
+					<div style="float:left;margin-left:10px;width:240px;">
+						<span style="line-height: 23px;color:#16a085;font-weight: 700;">Detecting dependency Management (DM) issues</span>
+					</div>
+				</div>
+				<div style="width:100%;float:left;">
+					<span style="font-size: 15px;">Hero focuses on detecting DM issues that have not yet manifested, but would probably happen when the concerned projects have their upstream or downstream projects upgraded</span>
+				</div>
+			</div>
+					
+			<div id="about_sol_div" class="about_module" style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 148px;border: 2px solid #16a085;">
+							<div style="height:60px;width:100%;float:left;">
+								<div style="float:left;">
+									<img style="width:50px;" src="{% static 'img/sol.png' %}" />
+								</div>
+								<div style="float:left;margin-left:10px;">
+									<span style="line-height: 50px;color:#16a085;font-weight: 700;">Customizing fixing suggestions</span>
+								</div>
+							</div>
+							<div style="width:100%;float:left;">
+								<span style="font-size: 15px;">HERO suggests applicable solutions to developers by customizing the template with potential impact analysis</span>
+							</div>
+						</div>
+		</div>
+		<div style="border-radius: 10px;float: right;height: 95%;width: 60%;border: 2px solid #fff;background-color: #00000066;">
+			
+		</div>
+	</div>
+</html>
