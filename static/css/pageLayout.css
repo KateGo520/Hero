@@ -55,7 +55,6 @@
 .table03{
     margin: 0 auto;
     width: 80%;
-    height: 100%;
     text-align: center;
     border: 3px solid #70C99E;
     border-radius: 10px;
@@ -63,24 +62,24 @@
 .table_distance{
     margin-top: 5%;
 }
-.table_width_ID{
+.table03_width_ID{
     width: 10%;
     height:auto;
 }
-.table_width_IssueID{
+.table03_width_IssueID{
     width: 10%;
     height:auto;
 }
-.table_width_ProjectName{
+.table03_width_ProjectName{
     width: 20%;
     height:auto;
 }
 
-.table_width_DetectedVersion{
+.table03_width_DetectedVersion{
     width: 20%;
     heigth:auto;
 }
-.table_width_IssueType{
+.table03_width_IssueType{
     width: 10%;
     height: auto;
 }
@@ -112,7 +111,6 @@
 
 .miss_td{
     text-align: right;
-    padding-right: 2%;
 }
 
 .table03 thead{
@@ -129,7 +127,6 @@
 .table04{
     margin: 0 auto;
     width: 80%;
-    height: 100%;
     text-align: center;
     border: 3px solid #70C99E;
     border-radius: 10px;

@@ -64,36 +64,40 @@ $(document).ready(function () {
     $(".top_menu li").click(function () {
         flag = $(this).index()
         if(flag == 0){
-            flag = 5
-        }else if(flag == 1){
-            flag = 4
-        }else if(flag == 2){
             flag = 3
-        }else if(flag == 3){
+            $(".main_content li").removeClass("aa").eq(flag).addClass("aa");
+            $(".reproduction").hide("slow");
+        }
+        else if(flag == 1){
+            $(".reproduction").show("slow");
+        }else if(flag == 2){
             flag = 2
-        }else if(flag == 4){
+            $(".main_content li").removeClass("aa").eq(flag).addClass("aa");
+            $(".reproduction").hide("slow");
+        }else if(flag == 3){
             flag = 1
-        }//else if(flag == 5){
-        //     flag = 2
-        // }else if(flag == 6){
-        //     flag = 1
-        //}
+            $(".main_content li").removeClass("aa").eq(flag).addClass("aa");
+            $(".reproduction").hide("slow");
+        }
         else{
             flag = 0
+            $(".main_content li").removeClass("aa").eq(flag).addClass("aa");
+            $(".reproduction").hide("slow");
         }
 
-        $(".main_content li").removeClass("aa").eq(flag).addClass("aa");
 
     });
     $("#start").click(function(){
              $(".head_menu").removeClass("active");
-             $(".head_menu").eq(4).addClass("active");
+             $(".head_menu").eq(3).addClass("active");
+             $(".reproduction").hide("slow");
              $(".main_content li").removeClass("aa").eq(1).addClass("aa");
         });
 
         $("#How").click(function(){
              $(".head_menu").removeClass("active");
              $(".head_menu").eq(0).addClass("active");
-             $(".main_content li").removeClass("aa").eq(5).addClass("aa");
+             $(".reproduction").hide("slow");
+             $(".main_content li").removeClass("aa").eq(3).addClass("aa");
         });
 })

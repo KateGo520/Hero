@@ -25,7 +25,7 @@ SECRET_KEY = '+!$sawj58aa48ql7+a=c)5rj(jy=ptiu97(xs4m*0lh&9(uai#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '47.254.86.255', 'www.hero-go.com']
+ALLOWED_HOSTS = ['127.0.0.1', '81.68.255.46', 'www.hero-go.com']
 
 
 # Application definition

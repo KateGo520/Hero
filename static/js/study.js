@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: '/diagnosis',
+        url: '/study',
         success: function (res) {
             datas = res.data
             for (tr = 0; tr < datas.length; tr++) {

@@ -1,0 +1,13 @@
+.reproduction{
+    display:none;
+    margin-right: 5px;
+    width:21%;
+    height:19%;
+    border-radius:10px;
+    padding:10px;
+    position:relative;
+    top:15px;
+    background-color:#2F4056;
+    float: right;
+    z-index: 999;
+}

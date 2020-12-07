@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from heroAPP import views
 urlpatterns = [
     path('', views.index),
     path('data/', views.data),

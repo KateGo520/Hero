@@ -14,9 +14,19 @@
     <link rel='stylesheet' href="{% static 'css/Diagnosis.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
     <link rel='stylesheet' href="{% static 'css/loader.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/Reproduction_Package.css' %}"/>
+    <link rel='stylesheet' href="{% static 'css/diagnosis_tools.css' %}" />
+    
     <script type="text/javascript" src="{% static 'js/jquery-3.5.1/jquery-3.5.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery-3.5.1/jquery.particleground.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/Reproduction_Package.js' %}"></script>
+    <script src="{% static 'js/about.js' %}"></script>
+	<script src="{% static 'js/aa.js' %}"></script>
+	<script src="{% static 'js/data.js' %}"></script>
+	<script src="{% static 'js/study.js' %}"></script>
+	<script src="{% static 'js/GT.js' %}"></script>
+	<script src="{% static 'js/d-test.js' %}"></script>
 
 </head>
 <body style="width:100%;background-color: #062427;margin: 0;">
@@ -29,24 +39,18 @@
                     <span style="cursor: pointer">About</span>
                 </div>
             </li>
-            {#            <li>#}
-            {#                <div class="head_menu" id="Demo">#}
-            {#                    <span style="cursor: pointer">Demo</span>#}
-            {#                </div>#}
-            {#            </li>#}
-            {#            <li>#}
-            {#                <div class="head_menu" id="Ecosystem">#}
-            {#                    <span style="cursor: pointer">Ecosystem</span>#}
-            {#                </div>#}
-            {#            </li>#}
-            <li>
-                <div class="head_menu" id="BenchmarkDataset">
+{% comment %}                <div class="head_menu" id="BenchmarkDataset">
                     <span style="cursor: pointer">Benchmark Dataset</span>
                 </div>
             </li>
             <li>
                 <div class="head_menu" id="EmpiricalStudyDataset">
                     <span style="cursor: pointer">Empirical Study Dataset</span>
+                </div>
+            </li>{% endcomment %}
+            <li>
+                <div class="head_menu" id="Reproduction_Package">
+                   <span style="cursor: pointer">Reproduction Package</span>
                 </div>
             </li>
             <li>
@@ -70,6 +74,12 @@
         </div>
     </div>
     <div id="main_div" class="main_content" style="overflow-y: auto;position: absolute;top:65px;width:100%;">
+         <div class="reproduction" style="color: white; float: right;line-height: 1.5;font-family: Palatino Linotype">
+             <span style="font-weight: bold;font-size: 20px">DownLoad:</span><br/>
+            <a href="{% static 'files/20k Subjects Info In RQ1.xlsx' %}" style="color: white;text-decoration: none;" onmouseover="this.style.color='#FCFFB3';" onmouseout="this.style.color='#FFFFFF';">1.&nbsp;20k Subjects Info In RQ1</a><br>
+            <a href="{% static 'files/Benchmark Dataset (132 DM issues and subjects used for evaluation in RQ4).zip' %}" style="color: white;text-decoration: none;" onmouseover="this.style.color='#FCFFB3';" onmouseout="this.style.color='#FFFFFF';">2.&nbsp;Benchmark Dataset (132 DM issues and subjects <br/>&nbsp;&nbsp;&nbsp;&nbsp;used for evaluation in RQ4)</a><br>
+            <a href="{% static 'files/Empirical Study Dataset (151 DM issues for RQ2&3).xlsx' %}" style="color: white;text-decoration: none;" onmouseover="this.style.color='#FCFFB3';" onmouseout="this.style.color='#FFFFFF';">3.&nbsp;Empirical Study Dataset (151 DM issues for <br/>&nbsp;&nbsp;&nbsp;&nbsp;RQ2&3)</a>
+        </div>
         <ul>
             <!--Home-->
             <li class="aa">
@@ -132,12 +142,142 @@
                 </div>
             </li>
             <!--Diagnosis-->
-            <li>
-                {#                 <div id="d_wait" style="text-align: center;position: absolute;margin-top:135px;margin:auto;width: 80%;height: 75%;min-height: 784px;background-color: rgba(111, 106, 100, 1);border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px;top: 0;visibility:hidden">#}
-                {#						<span style='color: rgba(243, 247, 26, 1);line-height: 600px;font-size: 66px;'>Coming soon!</span>#}
-                {#                 </div>#}
+            <li id="li-diagnosis">
+                <div id="d-help-win" class="d-help-win">
+					<div id="win-title">Help<span id="d-help-colse" clss="close_2" onmouseover="this.className='close_1'" onmouseout="this.className='close_2';"><center>&times;</center></span></div>
+					<div id="win-content">
+						
+						<div class="help-word">1. Input the <span class="help-em">name and version tag number</span> of your Go project released on GitHub.<br/>
+						2. Press the <span class="help-em">"Start"</span> button, we will provide the dependency graph, then help you diagnose the dependency conflict issues in your project 
+						and provide the detailed root causes and suggested fixing solutions.</div>
+						<center><img class="help-gif" src="../static/img/help/part1.gif" alt="" /></center>
+						<div class="help-word">In addition to <span class="help-em">version tag number</span>, you can also input the <span class="help-em">commit hash code</span> of your project.</div>
+						<center><img class="help-gif" src="../static/img/help/part2.gif" alt="" /></center>
+					</div>
+				</div>
+				<div class="git">
+					<a href="https://github.com/KateGo520/Hero" style="text-decoration: none;color: #FFFFFF;" onmouseover="this.style.color='#328E75';" onmouseout="this.style.color='#FFFFFF';">
+					<center>
+						<div class="git-img-div">
+							<div class="git-img-b" style="float:right;text-align: center;" onmouseover="this.style.backgroundColor='#FFFFFF';" onmouseout="this.style.backgroundColor='#328E75';">
+								<img class="git_img" src="../static/img/githublogo.png"  onmousemove="this.src='../static/img/githublogo2.png';this.style.backgroundColor='#328E75';" onmouseout="this.src='../static/img/githublogo.png';this.style.backgroundColor='#FFFFFF';"/>
 
-                <div style="margin:auto;width: 1200px;height: auto;min-height: 784px;background-color: #236360;opacity: 0.8;border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px; ">
+							</div>
+						</div>
+
+					<div class="git_str">
+		                View on GitHub
+		            </div>
+		            </center>
+		            </a>
+				</div>
+				<div id="diagnosis-class" style=" margin:auto;width: 1200px;height:auto;background-color: #236360;opacity: 0.8;border-radius: 10px;padding-left: 60px;padding-right: 60px;padding-bottom:10px;padding-top:10px;">
+					<div id="d_wait" style="margin:0 auto;top:110px;text-align: center;position: absolute;width: 1080px;height: 676px;background-color: rgba(255, 255, 255, 1);border-radius: 10px; visibility:hidden">
+						<div class="loader loader-3">
+							<div class="dot dot1">h</div>
+							<div class="dot dot2">e</div>
+							<div class="dot dot3">r</div>
+							<div class="dot dot4">o</div>
+							<center><div id="loader-word">
+								<span class="loader-word-1">Analyzing... </span>
+								<span class="loader-word-2">The process may take you several minutes.</span>
+							</div></center>
+							<center><div id="loader-word-3">Most functions are working, while some are under tuning for performance...</div></center>
+						</div>
+					</div>
+					<div id="d-help">
+						<img id="help-img"class="d-help-img" src="../static/img/demo/demo-2.png" onmousemove="this.src='../static/img/demo/demo-1.png';" onmouseout="this.src='../static/img/demo/demo-2.png';" />
+					</div>
+					<div id="d-input" style="width:100%;height:44px;margin-top: 30px;">
+						<div style="float:left;margin-left:20px;">
+							<label>
+		                        <span style="font-family: PingFangSC-Regular;font-size: 20px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Project name</span>
+		                    </label>
+							<input id="d_repo" type="text" style="margin-left: 10px;width: 234px;height: 44px;font-size: 18px;background-color: #ffffff;border-radius: 8px;border: solid 1px #ededed;" />
+						</div>
+						<div style="float:left;margin-left:4%;">
+							<label>
+		                        <span style="font-family: PingFangSC-Regular;font-size: 20px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Version/Hash Commit ID</span>
+		                    </label>
+							<input id="d_version" type="text" style="margin-left: 10px;width: 234px;height: 44px;font-size: 18px;background-color: #ffffff;border-radius: 8px;border: solid 1px #ededed;" />
+						</div>
+						<div class="d_buttion" id="start_diagnosis_btn" style="float:right;margin-right:20px;width: 100px;height: 44px;background-color: #328E75;border-radius: 8px;text-align: center;cursor:pointer;"
+						onmouseover="this.style.backgroundColor='#083C3A';" onmouseout="this.style.backgroundColor='#328E75';">
+							<span style="font-family: PingFangSC-Regular;font-size: 20px;font-weight: normal;font-stretch: normal;line-height: 44px;letter-spacing: 0px;color: #ffffff;">Start</span>
+						</div>
+					</div>
+					<div id="diagnosis_model" style="margin: auto;width: 100%;height:444px;background-color: #C9D6D5;border-radius: 8px;margin-top: 28px;">
+						<div style="width:100%;height:44px;margin:auto;text-align: center;padding-top: 10px;">
+							<span style="font-family: PingFangSC-Semibold;font-size: 19px;font-weight: normal;font-stretch: normal;letter-spacing: 0px;color: #36a450;">Dependency Model</span>
+						</div>
+						<div id="dependency-model" style="z-index: 10;width:100%;height:400px;color: #000000;background-color: #f2f4f7;"></div>
+					</div>
+					<div class="d-report" style="width:100%;margin-top:28px;margin-bottom:30px;min-height:200px;height:fit-content;">
+						<div style="float:left;width: 49%;height:100%;min-height: 200px;background-color: #052327;border-radius: 8px;">
+							<div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
+								<span style="line-height: 44px;font-size: 19px;">Root cause</span>
+							</div>
+							<div id="root_cause_div" style="width:100%;height:fit-content;padding:15px;color: #000000;">
+								<!--<span style="font-family: PingFangSC-Semibold;font-size: 15px;font-weight: normal;font-stretch: normal;color: #ffffff;">
+		                            <h3>ISSUE Type C.a :</h3>The <em> github.com/etcd-io/etcd </em> uses Go modules and the release version is <em>v3.4.13</em>.
+		                             And it's module path is <em>"go.etcd.io/etcd"</em>, instead of <em>"go.etcd.io/etcd/v3"</em>. It must comply with the specification
+		                              of "Releasing Modules for v2 or higher" available in the Modules documentation.
+		                              <h5>Quoting the specification:</h5>A package that has opted in to modules must include the major version in the import path to
+		                              import any v2+ modules. To preserve import compatibility, the go command requires that modules with major version v2 or later
+		                              use a module path with that major version as the final element. For example, version v2.0.0 of example.com/m must instead use
+		                              module path example.com/m/v2.<br/>
+		                              <a href="https://github.com/golang/go/wiki/Modules#releasing-modules-v2-or-higher">(FROM https://github.com/golang/go/wiki/Modules#releasing-modules-v2-or-higher)</a>
+		                        </span>
+		                        <span style="font-family: PingFangSC-Semibold;font-size: 15px;font-weight: normal;font-stretch: normal;color: #ffffff;">
+		                            <h3>ISSUE Type C.c :</h3>Module path is inconsistent with canonical repo address: Module path is <em>"chive"</em> ,
+		                            but canonical repo address is <em>"github.com/liu2hai/chive"</em> .<br/>GO111MODULE=on, run <em>go get github.com/kylesliu/gin_metrics</em> ,
+		                            will get this error:<br/><div class="code-div"> > go get: github.com/liu2hai/chive@4062106: parsing go.mod:<br/> > module declares its path as: chive<br/> >
+		                            but was required as: github.com/liu2hai/chive </div>
+		                        </span>-->
+							</div>
+						</div>
+						<div style="float:right;width: 49%;height: 100%;min-height: 200px;background-color: #052327;border-radius: 8px;">
+							<div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
+								<span style="line-height: 44px;font-size: 19px;">Suggested solutions</span>
+							</div>
+							<div id="suggested_solution_div" style="width:100%;height:fit-content;padding:15px;color: #000000;">
+								<!--<span style="font-family: PingFangSC-Semibold;font-size: 15px;font-weight: normal;font-stretch: normal;color: #ffffff;">
+									<h3>1. Kill the go.mod files, rolling back to GOPATH.</h3>
+									This would push them back to not being managed by Go modules (instead of
+									incorrectly using Go modules).Ensure compatibility for downstream module-aware
+									projects and module-unaware projects projects.<br/>
+									<h4>2. Fix module path to strictly follow SIV rules.</h4>
+		                            Patch the go.mod file to declare the module path as <em>"go.etcd.io/etcd/v3"</em>
+		                             as per the specs. And adjust all internal imports.The downstream projects
+		                            might be negatively affected in their building if they are module-unaware (Go
+		                            versions older than 1.9.7 and 1.10.3; Or use third-party dependency management
+		                            tools, such as: Dep, glide,govendor…).<br/>
+		                            [*] You can see who will be affected here: (<em>85 module-unaware</em> users, e.g., GayStudio/openbilibili, GDWGH/mu-li-xian-bei, smallnest/soar)<br/>
+		                            <a href="https://github.com/search?o=desc&q=%22github.com%2Fpingcap%2Ftidb%22+filename%3AGodeps.json+filename%3Avendor.conf+filename%3Avendor.json+filename%3Aglide.toml+filename%3AGodep.toml&s=indexed&type=Code">LINK</a>
+									<br/>If you don't want to break the above repos. This method can provides better backwards-compatibility:br/>
+									Release a v2 or higher module through the major subdirectory strategy: Create a new v3 subdirectory (github.com/pingcap/tidb/v3) and place a new go.mod file in that subdirectory. The module path must end with /v3. Copy or move the code into the v3 subdirectory. Update import statements within the module to also use /v3 (import "github.com/pingcap/tidb/v3/…"). Tag the release with v3.x.y.
+
+									<h4>3. Suggest your downstream module users to use hash instead of a version tag.</h4>
+									If the standard rule of go modules conflicts with your development mode.
+									Or not intended to be used as a library. So you cannot comply with the
+									specification of "Releasing Modules for v2 or higher" available in the Modules
+									documentation. Regardless, since it's
+									against one of the design choices of Go, it will be a bit of a hack for your users.
+								    Instead of <em>go get go.etcd.io/etcd@version-tag</em>, module users need to use this following way
+								    to get the <em>etcd-io/etcd:</em> <br/><div class="code-div">(1) Search for the tag you want (in browser);<br/>
+								    (2) Get the commit hash of the tag you want;<br/>(3) Run <em>go get go.etcd.io/etcd
+		                            @commit-hash</em> ;<br/>(4) Edit the go.mod file to put a comment about which version
+		                            you actually used.<br/></div>This will make it difficult for module users to get and
+		                            upgrade <em>etcd-io/etcd</em>.<br/>
+		                            [*] You can see who will be affected here: (<em>341 module</em> users, e.g., ushell/yearning, chaos-mesh/go-sqlancer, chaos-mesh/horoscope)<br />
+									<a href="https://github.com/search?q=pingcap%2Ftidb+filename%3Ago.mod&type=Code">LINK-1</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/search?q=pingcap%2Ftidb+filename%3Ago.mod&type=Code">LINK-2</a>
+								</span>-->
+							</div>
+						</div>
+					</div>
+
+				</div>
+                <!--<div style="margin:auto;width: 1200px;height: auto;min-height: 884px;background-color: #236360;opacity: 0.8;border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px; ">
                     <div id="d_wait"
                          style="margin:0 auto;top:20%;text-align: center;position: absolute;width: 1080px;height: 535px;background-color: rgba(255, 255, 255, 1);border-radius: 10px; visibility:hidden">
                         <div class="loader loader-3">
@@ -145,7 +285,7 @@
                             <div class="dot dot2">e</div>
                             <div class="dot dot3">r</div>
                             <div class="dot dot4">o</div>
-                            <div style="color: black;margin-top: 30%;margin-left:4%;font-size:60%;font-weight: bold;font-family: Tahoma"> Testing is underway, please wait a moment!</div>
+                            <div style="color: black;margin-top: 30%;margin-left:4%;font-size:60%;font-weight: bold;font-family: Tahoma"> Loading...</div>
                         </div>
                     </div>
                     <div style="width: 32px;height: 32px;background-color: #ffffff;border-radius: 24px;float: right;margin-right: -49px;margin-top: -31px;">
@@ -172,24 +312,24 @@
                         </div>
                     </div>
                     <div id="diagnosis_model"
-                         style="margin: auto;width: 100%;height: 52%;background-color: #f2f4f7;border-radius: 8px;margin-top: 40px;">
+                         style="margin: auto;width: 100%;height: auto;background-color: #f2f4f7;border-radius: 8px;margin-top: 40px;">
                         <div style="width:100%;height:9%;margin:auto;text-align: center;padding-top: 1%;">
                             <span style="font-family: PingFangSC-Semibold;font-size: 18px;font-weight: normal;font-stretch: normal;letter-spacing: 0px;color: #36a450;">Dependency Model</span>
                         </div>
-                        <div id="dependency-model" style="width:100%;height:300px;color: #000000;"></div>
+                        <div id="dependency-model" style="width:100%;height:400px;color: #000000;"></div>
                     </div>
-                    <div style="width:100%;margin-top:10px;height:auto;min-height: 150px;">
-                        <div style="float:left;width: 511px;height: 144px;background-color: #052327;border-radius: 8px;">
+                    <div style="width:100%;margin-top:10px;height:fit-content;">
+                        <div style="float:left;width: 511px;height:fit-content;background-color: #052327;border-radius: 8px;">
                             <div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
                                 <span style="line-height: 44px;">Root cause</span>
                             </div>
-                            <div id="root_cause_div" style="width:100%;padding:15px;color: #000000;"></div>
+                            <div id="root_cause_div" style="width:100%;height:fit-content;padding:15px;color: #000000;"></div>
                         </div>
-                        <div style="float:right;width: 511px;height: 144px;background-color: #052327;border-radius: 8px;">
+                        <div style="float:right;width: 511px;height: fit-content;;background-color: #052327;border-radius: 8px;">
                             <div style="width:100%;height: 44px;background-color: rgba(255,255,255,0.1);border-radius: 8px 8px 0px 0px;text-align: center;">
                                 <span style="line-height: 44px;">Suggested solutions</span>
                             </div>
-                            <div id="suggested_solution_div" style="width:100%;padding:15px;color: #000000;"></div>
+                            <div id="suggested_solution_div" style="width:100%;height:fit-content;padding:15px;color: #000000;"></div>
                         </div>
                     </div>
                     <div class="d_buttion"
@@ -200,49 +340,51 @@
                                 href="https://github.com/KateGo520/Hero"
                                 style="text-decoration: none">View on GitHub</a></span>
                     </div>
-                </div>
+                </div>-->
             </li>
             <!--issue report-->
             <li>
-                <table class="table" cellspacing="0" cellpadding="0">
-                    <caption class="tr_title td">Table Statistics of dependency management issues reported by HERO
-                    </caption>
-                    <caption class="tr_mark_01">
-                        <i><strong>Status 1</strong>:</i> Issues fixed using our suggestions;
-                        <i><strong>Status 2</strong>:</i> Issues under fixing using our suggestions;
-                        <i><strong>Status 3</strong>:</i> Issues confirmed, but fixing not decided;
-                        <i><strong>Status 4</strong>:</i> Issues fixed using other suggestions;
-                        <i><strong>Status 5</strong>:</i> Issues pending;
-                        <i>Issue ID <span style="color: red">♠</span>:</i> Migration to Go Modules conducted (desired);
-                    </caption>
-                    <thead>
-                    <tr>
-                        <th class='th color table_width_ID'
-                            style='border-right: 1px solid #70C99E;border-bottom: 1px solid #70C99E;'>ID
-                        </th>
-                        <th class='th color table_width_ProjectName' style='border-bottom: 1px solid #70C99E'>Project
-                            Name
-                        </th>
-                        <th class='th color table_width_CommitID' style='border-bottom: 1px solid #70C99E'>Commit ID
-                        </th>
-                        <th class='th color table_width_LastUpdateTime' style='border-bottom: 1px solid #70C99E'>Last
-                            Update Time
-                        </th>
-                        <th class='th color table_width_IssueID' style='border-bottom: 1px solid #70C99E'>Issue ID</th>
-                        <th class='th color table_width_IssueType' style='border-bottom: 1px solid #70C99E'>Issue Type
-                        </th>
-                        <th class='th color table_width_IssueStatus' style='border-bottom: 1px solid #70C99E'>Issue
-                            Status
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="data" class="baseScroll">
+                <div style="margin:0 auto;width: 1500px;height: 90%;min-height: 784px;min-width:1300px;border-radius: 10px;">
+                    <table class="table" cellspacing="0" cellpadding="0" >
+                        <caption class="tr_title td">Table Statistics of dependency management issues reported by HERO
+                        </caption>
+                        <caption class="tr_mark_01">
+                            <i><strong>Status 1</strong>:</i> Issues fixed using our suggestions;
+                            <i><strong>Status 2</strong>:</i> Issues under fixing using our suggestions;
+                            <i><strong>Status 3</strong>:</i> Issues confirmed, but fixing not decided;
+                            <i><strong>Status 4</strong>:</i> Issues fixed using other suggestions;
+                            <i><strong>Status 5</strong>:</i> Issues pending;
+                            <i>Issue ID <span style="color: red">♠</span>:</i> Migration to Go Modules conducted (desired);
+                        </caption>
+                        <thead>
+                        <tr>
+                            <th class='th color table_width_ID'
+                                style='border-right: 1px solid #70C99E;border-bottom: 1px solid #70C99E;'>ID
+                            </th>
+                            <th class='th color table_width_ProjectName' style='border-bottom: 1px solid #70C99E'>Project
+                                Name
+                            </th>
+                            <th class='th color table_width_CommitID' style='border-bottom: 1px solid #70C99E'>Commit ID
+                            </th>
+                            <th class='th color table_width_LastUpdateTime' style='border-bottom: 1px solid #70C99E'>Last
+                                Update Time
+                            </th>
+                            <th class='th color table_width_IssueID' style='border-bottom: 1px solid #70C99E'>Issue ID</th>
+                            <th class='th color table_width_IssueType' style='border-bottom: 1px solid #70C99E'>Issue Type
+                            </th>
+                            <th class='th color table_width_IssueStatus' style='border-bottom: 1px solid #70C99E'>Issue
+                                Status
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="data" class="baseScroll">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </li>
             <!--Empirical Study Dataset-->
-            <li>
+            {% comment %}<li>
                 <table class="table04" border='1' cellspacing="0" cellpadding="0">
                     <caption class="tr_title td">Detailed information of 151 collected DM issues used in the empirical
                         study <a href="{% static 'files/EmpiricalStudy.xlsx' %}">
@@ -321,9 +463,9 @@
                     </thead>
                     <tbody id="data02" class="baseScroll"></tbody>
                 </table>
-            </li>
+            </li>{% endcomment %}
             <!--Benchmark Dataset-->
-            <li>
+            {% comment %}<li>
                 <table class="table03" border="1" cellspacing="0" cellpadding="0">
                     <caption class="tr_title td">Detailed information of 132 collected DM issues used in the
                         benchmark dataset<a href="{% static 'files/GroundTruthDataset.zip' %}">
@@ -355,9 +497,7 @@
                     <tbody id="data03" class="baseScroll">
                     </tbody>
                 </table>
-            </li>
-            {#            <li></li>#}
-            {#            <li></li>#}
+            </li>{% endcomment %}
             <!--About-->
             <li>
                 <div style="margin:auto;width: 1200px;height: 90%;min-height: 784px;background-color: rgba(44,96,45,0.7);border-radius: 10px;padding: 40px;padding-left: 60px;padding-right: 60px;padding-bottom:10px;">
@@ -365,7 +505,7 @@
                         <ul>
                             <li>
                                 <div id="about_net_div" class="about_module about_active"
-                                     style="padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 137px;border: 2px solid #16a085;">
+                                     style="padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 137px;border: 2px solid #16a085; cursor: pointer">
                                     <div style="height:60px;width:100%;float:left;">
                                         <div style="float:left;">
                                             <img style="width:50px;" src="{% static 'img/net.png' %}"/>
@@ -381,7 +521,7 @@
                             </li>
                             <li>
                                 <div id="about_bug_div" class="about_module"
-                                     style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 193px;border: 2px solid #16a085;">
+                                     style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 193px;border: 2px solid #16a085;cursor: pointer">
                                     <div style="height:60px;width:100%;float:left;">
                                         <div style="float:left;">
                                             <img style="width:50px;" src="{% static 'img/bug.png' %}"/>
@@ -397,7 +537,7 @@
                             </li>
                             <li>
                                 <div id="about_sol_div" class="about_module"
-                                     style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 153px;border: 2px solid #16a085;">
+                                     style="margin-top:50px;padding:10px 7px 7px 10px;width:100%;border-radius: 10px;height: 153px;border: 2px solid #16a085;cursor: pointer">
                                     <div style="height:60px;width:100%;float:left;">
                                         <div style="float:left;">
                                             <img style="width:50px;" src="{% static 'img/sol.png' %}"/>
@@ -614,10 +754,7 @@
 </div>
 
 </body>
+<script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
 <script src="{% static 'js/diagnosis.js' %}"></script>
-<script src="{% static 'js/about.js' %}"></script>
-<script src="{% static 'js/aa.js' %}"></script>
-<script src="{% static 'js/data.js' %}"></script>
-<script src="{% static 'js/study.js' %}"></script>
-<script src="{% static 'js/GT.js' %}"></script>
+
 </html>

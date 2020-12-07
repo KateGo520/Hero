@@ -1,11 +1,51 @@
 .table{
     margin: 0 auto;
     width: 80%;
-    height: 100%;
     text-align: center;
     border: 3px solid #70C99E;
     border-radius: 10px;
+    position: absolute;
 }
+.table thead{
+    display:table;
+    width: calc( 100% - 0.4em);
+}
+
+.table tbody {
+	display: block;
+	height: 725px;
+	overflow-y:scroll;
+}
+.table_width_ID{
+    width: 5%;
+    height:auto;
+}
+.table_width_ProjectName{
+    width: 25%;
+    height:auto;
+}
+.table_width_CommitID{
+    width: 7.5%;
+    height:auto;
+}
+
+.table_width_LastUpdateTime{
+    width: 10%;
+    heigth:auto;
+}
+.table_width_IssueID{
+    width: 7.5%;
+    height: auto;
+}
+.table_width_IssueType{
+    width: 10%;
+    height: auto;
+}
+.table_width_IssueStatus{
+    width: 10%;
+    height: auto;
+}
+
 .tr_mark_01{
     margin-left: 5%;
     margin-right: 5%;
@@ -36,7 +76,6 @@
 /*字体大小*/
 .td_font{
     text-align: center;
-    font-size: 15px;
 }
 /*第二列表格的宽度*/
 .td_width{
@@ -56,7 +95,7 @@
 	border-radius: 8px;
 	text-align: center;
 	background-color:#236360;
-	opacity: 0.9;
+    opacity: 0.9;
     cursor: pointer;
 }
 
