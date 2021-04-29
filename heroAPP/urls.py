@@ -6,4 +6,5 @@ urlpatterns = [
     path('study/', views.study),
     path('GT/', views.GT),
     path('diagnosis/', views.diagnosis),
+    path('artifacts/', views.artifacts),
 ]

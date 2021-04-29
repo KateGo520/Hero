@@ -8,7 +8,7 @@ def get_repo_insert_db():
 
 
 def get_db_insert():
-    host = '47.254.86.255'
+    host = '47.88.48.19'
     user = 'root'
     password = 'Ella1996'
     db_name = 'hero-tool'

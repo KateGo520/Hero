@@ -418,11 +418,11 @@ $(document).ready(function() {
 				//          	var res = eval("("+resjson+")");
 				//          	alert(res.result)
 				if (res.result == 1) {
-					alert('Please enter the correct name of the project! :D')
+					alert('Please input the correct name of the project! :D')
 					document.getElementById("d_wait").style.visibility = "hidden";
 				} else {
 					if (res.result == 2) {
-						alert('Please enter the correct version of the project! :D')
+						alert('Please input the correct version of the project! :D')
 						document.getElementById("d_wait").style.visibility = "hidden";
 					} else {
 						if (res.result == 0) {

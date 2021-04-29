@@ -336,12 +336,12 @@ class RepoDep:
                 insert_cursor.execute(insert_sql)
                 db.commit()
                 insert_cursor.close()
-                print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@insert ', insert_db, ' successful', self.d_repo, self.d_version, self.d_hash, '==', self.u_repo,
+                print('@insert ', insert_db, ' successful', self.d_repo, self.d_version, self.d_hash, '==', self.u_repo,
                       self.u_version, self.u_hash)
                 self.insert_s = self.insert_s + 1
             except Exception as exp:
-                print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@***insert ', insert_db, ' error exception is:', exp)
-                print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@***insert ', insert_db, ' error sql:', insert_sql)
+                print('*insert ', insert_db, ' error exception is:', exp)
+                print('**insert ', insert_db, ' error sql:', insert_sql)
                 self.insert_e = self.insert_e + 1
                 # 发生错误时回滚
                 db.rollback()
@@ -371,16 +371,16 @@ class RepoDep:
                     update_cursor.execute(update_sql)
                     db.commit()
                     update_cursor.close()
-                    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@update ', insert_db, ' successful', self.d_repo, self.d_version, self.d_hash, '==',
-                          self.u_repo, self.u_version, self.u_hash)
+                    # print('@update ', insert_db, ' successful', self.d_repo, self.d_version, self.d_hash, '==',
+                    #       self.u_repo, self.u_version, self.u_hash)
                     self.update_s = self.update_s + 1
                 except Exception as exp:
-                    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@***update ', insert_db, ' error exception is:', exp)
-                    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@***update ', insert_db, ' error sql:', update_sql)
+                    print('*update ', insert_db, ' error exception is:', exp)
+                    print('**update ', insert_db, ' error sql:', update_sql)
                     self.update_e = self.update_e + 1
                     # 发生错误时回滚
                     db.rollback()
                 db.close()
-            else:
-                print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@This RepoDep already exit!')
+            # else:
+            #     print('This RepoDep already exit!')
         return sql

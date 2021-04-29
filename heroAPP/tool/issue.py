@@ -130,58 +130,61 @@ class ISSUE:
 
     def check_issue(self):
         (f_r, f_list) = repo.get_fake_version_list()
+        mod_siv = repo.get_imp_siv_path(self.repo_c.mod_full_path)
         # print(self.repo_c.r_type)
         if self.repo_c.r_type == 4:
-            # 问题3-1，C，下游新用户升级预警
+            # 3-1,C,down module user warning
             self.bug_type_num[4] = self.bug_type_num[4] + 1
             self.bug_list[4] = self.bug_list[4] + '$3-1:' + self.id.replace('=', '/')
         elif [self.repo_c.repo_name, self.repo_c.v_hash, '3-1'] in f_list:
             fake_version = repo.get_fake_version(self.repo_c.repo_name, self.repo_c.v_hash)
             i_id = self.repo_c.repo_name + '@' + fake_version
-            # 问题3-1，C，下游新用户升级预警
+            # 3-1,C,down module user warning
             self.bug_type_num[4] = self.bug_type_num[4] + 1
             self.bug_list[4] = self.bug_list[4] + '$3-1:' + i_id
-        elif self.repo_c.r_type == 10:
+        elif not mod_siv and self.repo_c.mod_num >= 2:
+            # 3-1,C,down module user warning
+            self.bug_type_num[4] = self.bug_type_num[4] + 1
+            self.bug_list[4] = self.bug_list[4] + '$3-1:' + self.id.replace('=', '/')
+        if self.repo_c.r_type == 10:
             siv_path = repo.get_imp_siv_path(self.repo_c.mod_full_path)
             mod_name = self.repo_c.mod_full_path.replace(siv_path, '').strip('/')
             git_name = repo.get_github_name_db(mod_name)
             if not git_name:
-                # 问题3-3，C，下游新用户升级预警
+                # 3-3,C,down module user warning
                 self.bug_type_num[4] = self.bug_type_num[4] + 1
                 self.bug_list[4] = self.bug_list[4] + '$3-3:' + self.repo_name + '@' + self.repo_c.mod_full_path
-        elif self.repo_c.v_siv == 1 and self.repo_c.mod_num > 0:
+        if self.repo_c.v_siv == 1 and self.repo_c.mod_num > 0:
             # version not siv
-            # 问题3-2，C，下游新用户升级预警
+            # 3-2,C,down module user warning
             self.bug_type_num[4] = self.bug_type_num[4] + 1
             self.bug_list[4] = self.bug_list[4] + '$3-2:' + self.id.replace('=', '/')
         elif [self.repo_c.repo_name, self.repo_c.v_hash, '3-2'] in f_list:
             fake_version = repo.get_fake_version(self.repo_c.repo_name, self.repo_c.v_hash)
             i_id = self.repo_c.repo_name + '@' + fake_version
             # version not siv
-            # 问题3-2，C，下游新用户升级预警
+            #  3-2,C,down module user warning
             self.bug_type_num[4] = self.bug_type_num[4] + 1
             self.bug_list[4] = self.bug_list[4] + '$3-2:' + i_id
-        elif (self.repo_c.r_type == 2 or (self.repo_c.mod_siv == 2 and self.repo_c.v_dir == 0)) \
+        if (self.repo_c.r_type == 2 or (self.repo_c.mod_siv == 2 and self.repo_c.v_dir == 0)) \
                 and not re.findall(r"^(gopkg\.in/.+?)\.v\d", self.repo_c.mod_full_path):  # virtual path
 
-            # 暂时放开该问题的检测，后续需要重开并重跑 ~~~~
-            # 检测该项目是否存在自身调用，因为如果本项目是分支法创建的v>=2的，且本地有调用自己的代码则会出现影响下游的情况。
+            # close for now ~~~~
             # self.repo_c.get_dm_local_new()
             # if self.repo_c.self_ref > 0:
 
-            # 问题1-0，A，下游预警
+            # 1-0,A,downstream warning
             self.bug_type_num[0] = self.bug_type_num[0] + 1
             self.bug_list[0] = self.bug_list[0] + '$1--:' + self.id.replace('=', '/')
 
         if self.repo_c.mod_num > 0 and (self.repo_c.tool_num == 0 or self.repo_c.mod_url[0] == '/'):
-            # 如果有非空的go.mod文件，说明是新机制
+            # Go Modules
             print('*module*')
             self.check_bug_new_repo()
         else:
-            # 遍历获取import导包语句
+            # GOPATH
             print('*non-module*')
             self.check_bug_old_repo()
-        # 打印检测结果
         impact = [0, 0]
         insert = 0
         replace = 0
@@ -287,10 +290,15 @@ class ISSUE:
                     # 问题2-1，B.b，更新可能会遇到问题
                     self.bug_type_num[3] = self.bug_type_num[3] + 1
                     self.bug_list[3] = self.bug_list[3] + '$2-1:' + i[0]
-                elif issue_22 == 0:
-                    # 问题2-2，B.b，更新可能会遇到问题
-                    self.bug_type_num[2] = self.bug_type_num[2] + 1
-                    self.bug_list[2] = self.bug_list[2] + '$2-2:' + i[0]
+                if i[1] > 1:
+                    # 问题2-1，B.b，更新可能会遇到问题
+                    self.bug_type_num[3] = self.bug_type_num[3] + 1
+                    self.bug_list[3] = self.bug_list[3] + '$2-3:' + i[0]
+                else:
+                    if issue_22 == 0:
+                        # 问题2-2，B.b，更新可能会遇到问题
+                        self.bug_type_num[2] = self.bug_type_num[2] + 1
+                        self.bug_list[2] = self.bug_list[2] + '$2-2:' + i[0]
 
     # direct_repo_list = [git_name, version, befor_name, siv_path, old]  old: 1 是旧路径；0 是新路径
     def check_bug_old_repo(self):
@@ -497,9 +505,22 @@ class ISSUE:
                 b_detail = b_d_l[1]
                 bug_list.append(['3-2', b_type, b_detail])
 
-        order_list = ['3-0=3-1', '3-0=3-3', '2-1=2-1', '1-1', '2-2=2-2', '3-0=3-2']
+        r_id = self.repo_name + '@' + self.v_hash
+        bug_type = repo.check_report_bug_type_dr(r_id)
+        if bug_type == '1-1':
+            order_list = ['1-1', '3-0=3-1', '3-0=3-3', '2-1=2-1', '2-2=2-2', '3-0=3-2']
+        elif bug_type == '2-1=2-1':
+            order_list = ['2-1=2-1', '3-0=3-1', '3-0=3-3', '1-1', '2-2=2-2', '3-0=3-2']
+        elif bug_type == '2-2=2-2':
+            order_list = ['2-2=2-2', '2-1=2-1', '3-0=3-1', '3-0=3-3', '1-1', '3-0=3-2']
+        elif bug_type == '3=3':
+            order_list = ['3-0=3-1', '3-0=3-3', '3-0=3-2', '2-2=2-2', '2-1=2-1', '1-1']
+        else:
+            order_list = ['3-0=3-1', '3-0=3-3', '2-1=2-1', '1-1', '2-2=2-2', '3-0=3-2']
         r_11_list = []
         r_21_list = []
+        r_23_list = []
+        r_21_21_list = []
         r_22_22_list = []
         s_22_22_list = []
         for b in bug_list:
@@ -752,9 +773,18 @@ class ISSUE:
                 r_22_22_list.append(r_22_22_str)
                 s_22_22_list.append(s_22_22_str)
             if b[0] == '1-1':
-                r_11_list.append(b[2])
+                if b[2] not in r_11_list:
+                    r_11_list.append(b[2])
             if b[0] == '2' and b[1] == '2-1':
-                r_21_list.append(b[2])
+                if len(b[2].split('=')) >= 2:
+                    if b[2] not in r_21_21_list:
+                        r_21_21_list.append(b[2])
+                else:
+                    if b[2] not in r_21_list:
+                        r_21_list.append(b[2])
+            if b[0] == '2' and b[1] == '2-3' and (b[2] not in r_23_list):
+                r_23_list.append(b[2])
+
         if r_22_22_list:
             r_22_22_str = '<h3>ISSUE Type B.b :</h3>'
             s_22_22_str = ''
@@ -802,16 +832,27 @@ class ISSUE:
             r_list = []
             v_list = []
             for r in r_11_list:
+                r_c = 0
                 if len(r.split('@')) >= 2:
                     if len(r.split('@')) >= 3:
                         old_name = r.split('@')[2]
                         if old_name:
-                            r_list.append(old_name + '(now moved to : ' + r.split('@')[0] + ')')
+                            r_11 = old_name + '(now moved to : ' + r.split('@')[0] + ')'
+                            if r_11 not in r_list:
+                                r_list.append(r_11)
+                                r_c = 1
                         else:
-                            r_list.append(r.split('@')[0])
+                            r_11 = r.split('@')[0]
+                            if r_11 not in r_list:
+                                r_list.append(r_11)
+                                r_c = 1
                     else:
-                        r_list.append(r.split('@')[0])
-                    v_list.append(r.split('@')[1])
+                        r_11 = r.split('@')[0]
+                        if r_11 not in r_list:
+                            r_list.append(r_11)
+                            r_c = 1
+                    if r_c:
+                        v_list.append(r.split('@')[1])
 
             for r in r_list:
                 r_11_str = r_11_str + '<em>' + r + '</em> ,'
@@ -900,20 +941,95 @@ class ISSUE:
             v_list = []
             for r in r_21_list:
                 if len(r.split('@')) >= 2:
-                    r_list.append(r.split('@')[0])
-                    v_list.append(r.split('@')[1])
+                    if r.split('@')[0] not in r_list:
+                        r_list.append(r.split('@')[0])
+                        v_list.append(r.split('@')[1])
             if r_list:
                 project_name = r_list[0].replace('github.com/', '')
                 path_name = 'github.com/' + r_list[0].replace('github.com/', '')
+                if v_list[0] != '0' and v_list[0]:
+                    r_21_21_str = '<h3>ISSUE Type B.a :</h3><em>' + self.repo_c.repo_name
+                    r_21_21_str += '</em> has already opted into module and indirectly depends on <em>' + project_name
+                    r_21_21_str += '</em> from a GOPATH project. And project <em>' + project_name
+                    r_21_21_str += '</em> already opted into module and and redirects(or rename) its import path ' \
+                                   'from <em> "' + path_name + '" </em> to <em> "' + v_list[0]
+                    r_21_21_str += '" </em>. You indirectly import <em>' + project_name + '</em> through the old '
+                    r_21_21_str += 'path <em> "' + path_name + '" </em> from a GOPATH project. In this case, you ' \
+                                                               'will easily get build errors:<br/>'
+                    r_21_21_str += '<div class="code-div"> > go get: ' + path_name
+                    r_21_21_str += ' : parsing go.mod:<br/> > module declares its path as: ' + v_list[0]
+                    r_21_21_str += '<br/> > but was required as: ' + path_name + '<br/></div><br/>"'
+
+                    if len(r_list) >= 1:
+                        r_21_21_str += 'Same to these indirect dependencies:'
+                        for i in range(1, len(r_list)):
+                            r_21_21_str += ' <em>' + r_list[i].replace('github.com/', '') + '</em> ,'
+                        r_21_21_str = r_21_21_str.strip(',') + '.<br/>'
+                else:
+                    r_21_21_str = '<h3>ISSUE Type B.a :</h3><em>' + self.repo_c.repo_name
+                    r_21_21_str += '</em> has already opted into module and indirectly depends on <em>' + project_name
+                    r_21_21_str += '</em> through a GOPATH project. And project <em>' + project_name
+                    r_21_21_str += '</em> already opted into module and redirected(or rename) or deleted its ' \
+                                   'import path <em> "' + path_name + '" </em>. You indirectly import <em>'
+                    r_21_21_str += project_name + '</em> through the old path <em> "' + path_name
+                    r_21_21_str += '" </em> from a GOPATH project. In this case, you will easily get build ' \
+                                   'errors(Cannot find package).'
+                    if len(r_list) >= 1:
+                        r_21_21_str += 'Same to these indirect dependencies:'
+                        for i in range(1, len(r_list)):
+                            r_21_21_str += ' <em>' + r_list[i].replace('github.com/', '') + '</em> ,'
+                        r_21_21_str = r_21_21_str.strip(',') + '.<br/>'
+
+                s_21_21_str = '<h3>Add a replace directive in your go.mod files, replace all the old import paths.</h3>'
+
+                if [r_21_21_str, s_21_21_str, order_list.index('2-1=2-1')] not in report_list:
+                    report_list.append([r_21_21_str, s_21_21_str, order_list.index('2-1=2-1')])
+        if r_21_21_list or r_23_list:
+            r_list = []
+            v_list = []
+            aready_fixed = 0
+            if r_21_21_list:
+                for r in r_21_21_list:
+                    if len(r.split('=')) >= 2:
+                        if r.split('=')[0] not in r_list:
+                            r_list.append(r.split('=')[0])
+                            v_list.append(r.split('=')[1])
+            else:
+                aready_fixed = 1
+                for r in r_23_list:
+                    if len(r.split('=')) >= 2:
+                        if r.split('=')[0] not in r_list:
+                            r_list.append(r.split('=')[0])
+                            v_list.append(r.split('=')[1])
+            if r_list:
+                if len(r_list[0].split('@')) >= 2:
+                    p_name = r_list[0].split('@')[0]
+                    p_version = r_list[0].split('@')[1]
+                else:
+                    p_name = r_list[0].replace('@', '')
+                    p_version = ''
+                if len(v_list[0].split('@')) >= 2:
+                    p_mode_path = v_list[0].split('@')[0]
+                    p_new_version = v_list[0].split('@')[1]
+                else:
+                    p_mode_path = v_list[0].replace('@', '')
+                    p_new_version = ''
+                project_name = p_name.replace('github.com/', '')
+                path_name = 'github.com/' + p_name.replace('github.com/', '')
+                if aready_fixed:
+                    r_a_f = '<h3>** Already Fixed **</h3>'
+                else:
+                    r_a_f = ''
                 r_21_21_str = '<h3>ISSUE Type B.a :</h3><em>' + self.repo_c.repo_name
                 r_21_21_str += '</em> has already opted into module and indirectly depends on <em>' + project_name
-                r_21_21_str += '</em> through a module-unaware project. And project <em>' + project_name
+                r_21_21_str += '</em> through a GOPATH project. And project <em>' + project_name
                 r_21_21_str += '</em> already opted into module and released a v2+ version with the major branch ' \
-                               'strategy. From module-unaware project’s perspective, it interprets the import ' \
-                               'path <em> "' + path_name + '" </em> as ' + project_name
-                r_21_21_str += '\'s latest version. But from the Go Modules\' point of view, path <em> ' \
-                               '"' + path_name + '" </em> equals to version v0/v1 or the latest version ' \
-                                                 'that doesn’t use the module. So when you try to get <em>'
+                               'strategy. The latest module path of <em>' + project_name
+                r_21_21_str += '</em> is <em> "' + p_mode_path + '" </em>. From module-unaware project\'s '
+                r_21_21_str += 'perspective, it interprets the import path <em> "' + path_name + '" </em> as '
+                r_21_21_str += project_name + '\'s latest version. But from the Go Modules\' point of view, '
+                r_21_21_str += 'path <em> "' + path_name + '" </em> equals to version v0/v1 or the latest version ' \
+                                                           'that doesn’t use the module. So when you try to get <em>'
                 r_21_21_str += project_name + '</em> through the indirect path <em> "' + path_name
                 r_21_21_str += '" </em> which comes from module-unaware project, the module pulls the old ' \
                                'version of ' + project_name + ' , ' + v_list[0] + ' . This causes version of '
@@ -922,15 +1038,15 @@ class ISSUE:
                 if len(r_list) >= 1:
                     r_21_21_str += 'Same to these indirect dependencies:'
                     for i in range(1, len(r_list)):
-                        r_21_21_str += ' <em>' + r_list[i].replace('github.com/', '') + ' ' + v_list[i] + '</em> ,'
+                        r_21_21_str += ' <em>' + r_list[i].replace('github.com/', '').replace('@', ' ') + '</em> ,'
                     r_21_21_str = r_21_21_str.strip(',') + '.<br/>'
 
                 s_21_21_str = '<h3>Add a replace directive in your go.mod files with version information to avoid ' \
                               'sticking at the old version.</h3>'
-
+                r_21_21_str = r_a_f + r_21_21_str
+                s_21_21_str = r_a_f + s_21_21_str
                 if [r_21_21_str, s_21_21_str, order_list.index('2-1=2-1')] not in report_list:
                     report_list.append([r_21_21_str, s_21_21_str, order_list.index('2-1=2-1')])
-
         report_list = sorted(report_list, key=lambda x: x[2])
         if not report_list:
             report_list.append(['no issue', 'no solution', 10])

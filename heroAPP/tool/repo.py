@@ -13,6 +13,7 @@ import pymysql
 # from download import DOWNLOAD
 # from download import PATH
 # import repoDep
+# import downDep
 from .download import DOWNLOAD
 from .download import PATH
 from . import repoDep
@@ -34,7 +35,7 @@ def get_repo_insert_db():
 
 
 def get_db_search():
-    host = '47.254.86.255'
+    host = '47.88.48.19'
     user = 'root'
     password = 'Ella1996'
     db_name = 'githubspider'
@@ -42,7 +43,7 @@ def get_db_search():
 
 
 def get_db_insert():  # downDep 中有重复
-    host = '47.254.86.255'
+    host = '47.88.48.19'
     user = 'root'
     password = 'Ella1996'
     db_name = 'hero-tool'
@@ -60,15 +61,21 @@ def get_tool_name_list_2():
 
 
 def get_token():  # download 重复
-    # token 0a6cca72aa3cc98993950500c87831bfef7e5707
+    # token 0a6cca72aa3cc98993950500c87831bfef7e5707 [meng] x
     # token ad418c5441a67ad8b2c95188e131876c6a1187fe [end] x
     # token abdd967d350662632381f130cd62268ed2f961a1 [end] x
     # token ff4e63b2dba8febac0aeb59aa3b8829a05de97e7 [hu] x
     # token a41ca9587818fc355b015376e814df47223fc136 [me] x
-    # token a8ad3ffb79d2ef67a1f19da8245ff361e624dc20 [ql]
-    # token 6f8454c973d4f7f07a57c2982db79d2ce543403d [zs]
-    token_list = ['0a6cca72aa3cc98993950500c87831bfef7e5707', 'a8ad3ffb79d2ef67a1f19da8245ff361e624dc20',
-                  '6f8454c973d4f7f07a57c2982db79d2ce543403d']
+
+    # token a8ad3ffb79d2ef67a1f19da8245ff361e624dc20 [ql] x
+    # token 6f8454c973d4f7f07a57c2982db79d2ce543403d [zs] x
+    # token 3e87d1e3a489815cdf597a10b426ad1e2a7426db [zs] x
+    # token 24748c727dfbcbfa18c3478f495c2b8b6ed1703e [ql] x
+    # token 412aed2204841af74b641fbbc7bfdd2274ca9d71 [ql]
+    # token 7e874141d51454c0b7eeee77052bf4977588c076 [djt]
+    # token c2f78adf111b7630ca6bd643876f6dd68b781f8f [zs] 
+    token_list = ['412aed2204841af74b641fbbc7bfdd2274ca9d71', '7e874141d51454c0b7eeee77052bf4977588c076',
+                  'c2f78adf111b7630ca6bd643876f6dd68b781f8f']
     index_num = random.randint(0, 2)
     return token_list[index_num]
 
@@ -540,7 +547,7 @@ def get_dm_msg(repo_name, headers, search_e):
     return mod_count, mod_url_list, tool_count, tool_url_list, search_e
 
 
-# 库查询：new_web_name , 通过其他新的web路径找旧的github的名字，通姑婆个性化网址查github上的网址
+# 库查询：new_web_name , 通过其他新的web路径找旧的github的名字，通过个性化网址查github上的网址
 def get_github_name_db(spec_name):
     (host, user, password, db_name) = get_db_search()
     sql = "SELECT old_url FROM new_web_name WHERE now_url='%s'" % spec_name
@@ -635,7 +642,7 @@ def check_repo_red_del(old_repo):
         return ''
 
 
-# 库查询：repo_name_update , get the redirected repo name, 不包括为0的返回项， 旧查新
+# 库查询：repo_name_update , get the redirected repo name, 不包括为0的返回项， 新查旧
 def get_redirect_old_repo(new_repo):
     # repo_name_update
     check_db_name = 'repo_name_update'
@@ -718,6 +725,7 @@ def get_requires_from_mod(mod_url, requires_list, mod_require_list):
 
 # 用于诊断问题2-1  (有indirect是1，没有是0)
 def get_req_from_mod(mod_url, ir_list):
+    replaces_list = []
     # print('go.mod:', mod_url)
     f = open(mod_url)
     go_mod_content = f.read()
@@ -757,7 +765,27 @@ def get_req_from_mod(mod_url, ir_list):
                 req = [require_r.split(' ')[0], require_r.split(' ')[1], 0]
                 if req not in ir_list:
                     ir_list.append(req)
-    return ir_list
+    # get all replace
+    mod_replaces = re.findall(r"replace\s*\(\n*(.+?)\n*\)", require_part, re.S)
+    if mod_replaces:
+        replace_l = mod_replaces[0].split('\n')
+        for replace_p in replace_l:
+            replace_p = replace_p.strip().replace('+incompatible', '')
+            if replace_p and (not re.findall(r"^//.+?", replace_p)):
+                replace_rl = re.findall(r"^(.+?)\s", replace_p)
+                replace_rr = re.findall(r"=>\s(.+?)$", replace_p)
+                if replace_rl and replace_rr and ([replace_rl[0], replace_rr[0]] not in replaces_list):
+                    replaces_list.append([replace_rl[0], replace_rr[0]])
+
+    mod_replaces = re.findall(r"^replace\s+([^(]+?)$", require_part, re.M)
+    for replace_r in mod_replaces:
+        replace_r = replace_r.strip()
+        if replace_r:
+            replace_rl = re.findall(r"^(.+?)\s", replace_r)
+            replace_rr = re.findall(r"=>\s(.+?)$", replace_r)
+            if replace_rl and replace_rr and ([replace_rl[0], replace_rr[0]] not in replaces_list):
+                replaces_list.append([replace_rl[0], replace_rr[0]])
+    return ir_list, replaces_list
 
 
 def get_mod_require(mod_url, requires_list, replaces_list):
@@ -866,7 +894,7 @@ def get_github_name(dep_name):
         if git_name:
             git_mod_name = git_name
         else:
-            insert_new_spec_db(dep_name.replace(siv_path, ''))
+            insert_new_spec_db(repo_name)
     else:
         if re.findall(r"^([^/]+?/[^/]+?)$", nosiv_path):
             repo_name = re.findall(r"^([^/]+?/[^/]+?)$", nosiv_path)[0]
@@ -879,16 +907,7 @@ def get_github_name(dep_name):
         if git_name:
             git_mod_name = git_name
         else:
-            # insert_new_spec_db(dep_name.replace(siv_path, ''))
-            if re.findall(r"^([^/]+?/[^/]+?/[^/]+?)$", nosiv_path):
-                repo_name = re.findall(r"^([^/]+?/[^/]+?/[^/]+?)$", nosiv_path)[0]
-            elif re.findall(r"^([^/]+?/[^/]+?/[^/]+?)/", nosiv_path):
-                repo_name = re.findall(r"^([^/]+?/[^/]+?/[^/]+?)/", nosiv_path)[0]
-            (r, git_name) = get_github_name_db(repo_name)
-            if git_name:
-                git_mod_name = git_name
-            else:
-                insert_new_spec_db(dep_name.replace(siv_path, ''))
+            insert_new_spec_db(repo_name)
     return git_mod_name
 
 
@@ -902,10 +921,10 @@ def return_repo_name(dep_name):
 # 将github.com/.../.../.../... 解析出repo_name
 def get_git_repo_name(dep):
     repo_name = ''
-    if re.findall(r"^github\.com/([^/]+?/[^/]+?)$", dep):
-        repo_name = re.findall(r"^github\.com/([^/]+?/[^/]+?)$", dep)[0]
-    elif re.findall(r"^github\.com/([^/]+?/[^/]+?)/", dep):
-        repo_name = re.findall(r"^github\.com/([^/]+?/[^/]+?)/", dep)[0]
+    if re.findall(r"^github.com/([^/]+?/[^/]+?)$", dep):
+        repo_name = re.findall(r"^github.com/([^/]+?/[^/]+?)$", dep)[0]
+    elif re.findall(r"^github.com/([^/]+?/[^/]+?)/", dep):
+        repo_name = re.findall(r"^github.com/([^/]+?/[^/]+?)/", dep)[0]
     return repo_name
 
 
@@ -927,16 +946,40 @@ def get_imp_siv_path(dep_name):
 def get_repo_name(dep_name):
     repo_name = ''
     siv_path = get_imp_siv_path(dep_name)
-    if re.findall(r"^github\.com/", dep_name):
+    if re.findall(r"^github.com/", dep_name):
         repo_name = get_git_repo_name(dep_name)
-    if re.findall(r"go\.etcd\.io/", dep_name):
-        dep_name = dep_name.replace('go.etcd.io/', 'etcd-io/')
-        repo_name = return_repo_name(dep_name)
-    elif re.findall(r"golang\.org/x/", dep_name):
-        dep_name = dep_name.replace('golang.org/x/', 'golang/')
-        repo_name = return_repo_name(dep_name)
-    elif re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)\.v\d", dep_name):
-        repo_name = re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)\.v\d", dep_name)[0]
+    elif re.findall(r"^go.etcd.io/", dep_name):
+        repo_name = dep_name.replace('go.etcd.io/', 'etcd-io/')
+        if repo_name != dep_name:
+            repo_name = return_repo_name(repo_name)
+        else:
+            git_name = get_github_name(dep_name)
+            # gopkg.in/alecthomas/gometalinter.v2   golang.org/x/sync
+            if git_name:
+                repo_name = git_name
+    elif re.findall(r"^golang.org/x/", dep_name):
+        repo_name = dep_name.replace('golang.org/x/', 'golang/')
+        if repo_name != dep_name:
+            repo_name = return_repo_name(repo_name)
+        else:
+            git_name = get_github_name(dep_name)
+            # gopkg.in/alecthomas/gometalinter.v2   golang.org/x/sync
+            if git_name:
+                repo_name = git_name
+    elif re.findall(r"^gopkg\.in/", dep_name):
+        if re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)\.v\d", dep_name):
+            repo_name = re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)\.v\d", dep_name)[0]
+        else:
+            if re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)\.", dep_name):
+                repo_name = re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)\.", dep_name)[0]
+            else:
+                if re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)/", dep_name):
+                    repo_name = re.findall(r"^gopkg\.in/([^/]+?/[^/]+?)/", dep_name)[0]
+                else:
+                    git_name = get_github_name(dep_name)
+                    # gopkg.in/alecthomas/gometalinter.v2   golang.org/x/sync
+                    if git_name:
+                        repo_name = git_name
     else:
         git_name = get_github_name(dep_name)
         # gopkg.in/alecthomas/gometalinter.v2   golang.org/x/sync
@@ -1024,7 +1067,7 @@ def insert_new_spec_db(spec_name):
             insert_cursor.execute(sql)
             db.commit()
             insert_cursor.close()
-            # print('insert new_spec_db successful', spec_name)
+            print('Cannot find so insert into new_spec_db:', spec_name)
         except Exception as exp:
             print('insert new_spec_db error exception is:', exp)
             print('insert new_spec_db error sql:', sql)
@@ -1098,7 +1141,7 @@ def l_deal_mod(mod_list, repo_url, mod_dir_name, repo_name):
             l_mod_list.append(str(count) + '_' + m_url)
             (mod_req_list, mod_rep_list) = get_mod_require(url, mod_req_list, mod_rep_list)
             shutil.copyfile(url, cd_url)
-            print('+++++++++++++++++++++++++++++++复制： ', url, cd_url, '++++++++++++++++++++++++++++++++++++++++')
+            # print('+++++++++++++++++++++++++++++++copy： ', url, cd_url, '++++++++++++++++++++++++++++++++++++++++')
             # print('dependencies from go.mod files :', self.mod_req_list, self.mod_rep_list)
     # mod_dep_list
     for m in mod_req_list:
@@ -1131,7 +1174,7 @@ def l_deal_tool(tool_list, repo_url, tool_dir_name):
         cd_url = os.path.join(tool_dir_name, str(count) + '_' + t_file_name)
         l_tool_list.append(str(count) + '_' + t_url)
         shutil.copyfile(url, cd_url)
-        print('+++++++++++++++++++++++++++++++复制： ', url, cd_url, '++++++++++++++++++++++++++++++++++++++++')
+        # print('+++++++++++++++++++++++++++++++copy： ', url, cd_url, '++++++++++++++++++++++++++++++++++++++++')
     return l_tool_list
 
 
@@ -1162,7 +1205,7 @@ def get_all_direct_dep(import_list):
     for imp in import_list:
         (repo_name, siv_path) = get_repo_name(imp)
         if repo_name:
-            if not re.findall(r"^github\.com/", imp):
+            if not re.findall(r"^github.com/", imp):
                 web_name = get_new_url('github.com/' + repo_name)
                 if [repo_name, web_name, siv_path, 0] not in repo_list:
                     repo_list.append([repo_name, web_name, siv_path, 0])
@@ -1174,8 +1217,8 @@ def get_all_direct_dep(import_list):
             else:
                 now_name = check_repo_red_del(repo_name)
                 if not now_name and now_name != '0':
-                    if [repo_name, '', siv_path, 1] not in repo_list:
-                        repo_list.append([repo_name, '', siv_path, 1])
+                    if [repo_name, '', siv_path, 0] not in repo_list:
+                        repo_list.append([repo_name, '', siv_path, 0])
                         # print('get_all_direct_dep方法:', [repo_name, ''])
                 else:
                     if [now_name, repo_name, siv_path, 1] not in repo_list:
@@ -1184,7 +1227,7 @@ def get_all_direct_dep(import_list):
                 # if repo_name not in dep_list:
                 #     dep_list.append(repo_name)
     for dep in repo_list:
-        if len(dep[0].split('/')) >= 2 and dep[0] != '0':
+        if len(dep[0].split('/')) >= 2 and dep[0] != '0' and dep[0]:
             (v_name, v_hash, search_e) = get_last_version_or_hashi(dep[0], search_e)
             if v_name or v_hash:
                 if v_name:
@@ -1193,8 +1236,9 @@ def get_all_direct_dep(import_list):
                     direct_repo_list.append([dep[0], v_hash, dep[1], dep[2], dep[3]])
             else:
                 print('*******get last version failed*********************')
+                direct_repo_list.append([dep[0], v_hash, dep[1], dep[2], dep[3]])
         else:
-            direct_repo_list.append([dep[0], '', dep[1], dep[2], dep[3]])  # 存在已删除或重定向的依赖项
+            direct_repo_list.append([dep[1], '', dep[0], dep[2], dep[3]])  # 存在已删除或重定向的依赖项
     # print('direct_repo_list:', direct_repo_list)
     return direct_repo_list
 
@@ -1202,39 +1246,64 @@ def get_all_direct_dep(import_list):
 # 新机制获取所有的直接依赖项
 # direct_repo_list = [git_name, version, befor_name, siv_path, old]  old: 1 是旧路径；0 是新路径
 def get_all_direct_depmod(import_list, mod_dep_list):
+    search_e = 0
     direct_dep_list = []
-    for m_d in mod_dep_list:
-        if m_d[2] == 1:
-            for i in import_list:
-                if re.findall(r"^" + m_d[0], i) and ([m_d[0], m_d[1]] not in direct_dep_list):
-                    (repo_name, siv_path) = get_repo_name(m_d[0])
-                    if repo_name:
-                        if not re.findall(r"^github\.com/", m_d[0]):
-                            web_name = get_new_url('github.com/' + repo_name)
-                            if [repo_name, m_d[1], web_name, siv_path, 0] not in direct_dep_list:
-                                direct_dep_list.append([repo_name, m_d[1], web_name, siv_path, 0])
-                            # # 判断该版本是否在github上的存储库存在
-                            # error_msg = check_insert_mes(repo_name, m_d[1])
-                            # if error_msg == 0:
-                            #     if [repo_name, m_d[1], web_name, siv_path] not in direct_dep_list:
-                            #         direct_dep_list.append([repo_name, m_d[1], web_name, siv_path])
-                            # elif error_msg == 2:
-                            #     # 获取新版本
-                            #     (dep_c_version, dep_c_semantic) = get_last_version(repo_name)
-                            #     if not dep_c_semantic:
-                            #         dep_c_version = get_last_hash(repo_name)
-                            #     if [repo_name, dep_c_version, web_name, siv_path] not in direct_dep_list:
-                            #         direct_dep_list.append([repo_name, dep_c_version, web_name, siv_path])
-                        else:
-                            now_name = check_repo_red_del(repo_name)
-                            if not now_name and now_name != '0':
-                                if [repo_name, m_d[1], now_name, siv_path, 1] not in direct_dep_list:
-                                    direct_dep_list.append([repo_name, m_d[1], now_name, siv_path, 1])
-                                    # print('get_all_direct_dep方法:', [repo_name, ''])
-                            else:
-                                if [now_name, m_d[1], repo_name, siv_path, 1] not in direct_dep_list:
-                                    direct_dep_list.append([now_name, m_d[1], repo_name, siv_path, 1])
+    repo_list = []
+    for imp in import_list:
+        (repo_name, siv_path) = get_repo_name(imp)
+        if repo_name:
+            if not re.findall(r"^github.com/", imp):
+                web_name = get_new_url('github.com/' + repo_name)
+                if [repo_name, web_name, siv_path, 0] not in repo_list:
+                    repo_list.append([repo_name, web_name, siv_path, 0])
+                # if web_name:
+                #     if web_name not in dep_list:
+                #         dep_list.append(web_name)
+                # else:
+                #     dep_list.append(repo_name)
+            else:
+                now_name = check_repo_red_del(repo_name)
+                if not now_name and now_name != '0':
+                    if [repo_name, '', siv_path, 0] not in repo_list:
+                        repo_list.append([repo_name, '', siv_path, 0])
+                        # print('get_all_direct_dep方法:', [repo_name, ''])
+                else:
+                    if [now_name, repo_name, siv_path, 1] not in repo_list:
+                        repo_list.append([now_name, repo_name, siv_path, 1])
+                        # print('get_all_direct_dep方法:', [repo_name, ''])
+                # if repo_name not in dep_list:
+                #     dep_list.append(repo_name)
+    for dep in repo_list:
+        if len(dep[0].split('/')) >= 2 and dep[0] != '0' and dep[0]:
+            if dep[1]:
+                d_r_name = dep[1]
+            else:
+                d_r_name = dep[0]
+            d_r_path = d_r_name + dep[2]
+            d_r_version = ''
+            for m_d in mod_dep_list:
+                if re.findall(r"^" + d_r_path, m_d[0]) or re.findall(r"^github.com/" + d_r_path, m_d[0]):
+                    d_r_version = m_d[1]
                     break
+            if d_r_version == '' and dep[2]:
+                for m_d in mod_dep_list:
+                    if re.findall(r"^" + d_r_name, m_d[0]) or re.findall(r"^github.com/" + d_r_name, m_d[0]):
+                        d_r_version = m_d[1]
+                        break
+            if d_r_version == '':
+                (v_name, v_hash, search_e) = get_last_version_or_hashi(dep[0], search_e)
+                if v_name or v_hash:
+                    if v_name:
+                        direct_dep_list.append([dep[0], v_name, dep[1], dep[2], dep[3]])
+                    else:
+                        direct_dep_list.append([dep[0], v_hash, dep[1], dep[2], dep[3]])
+                else:
+                    print('*******get last version failed*********************')
+                    direct_dep_list.append([dep[0], v_hash, dep[1], dep[2], dep[3]])
+            else:
+                direct_dep_list.append([dep[0], d_r_version, dep[1], dep[2], dep[3]])
+        else:
+            direct_dep_list.append([dep[1], '', dep[0], dep[2], dep[3]])  # 存在已删除或重定向的依赖项
     return direct_dep_list
 
 
@@ -1325,19 +1394,16 @@ def deal_local_repo(root_url, local_url, go_list, mod_list, tool_list, vendor_li
                 if os.path.isfile(v_path) and ((v in tool_name_list) or (v in tool_name_list_2)):
                     tool_list.append(v_r_path)
                 elif os.path.isdir(v_path):
-                    nd_path = os.path.join('root', 'www', 'run-tool', 'pkg', '2')
-                    if nd_path == 'root/www/run-tool/pkg/2':
-                        nd_path = '/' + nd_path
-                        nd_path_2 = nd_path + '/'
-                    else:
-                        nd_path = '\\' + nd_path
-                        nd_path_2 = nd_path + '\\'
+                    path_c = PATH()
+                    nd_path = path_c.get_deal_local_dir()
+                    nd_path_2 = os.path.join(nd_path, '@').strip('@')
+                    # nd_path = os.path.join('root', 'www', 'run-tool', 'pkg', '2')
                     if re.findall(r"^" + nd_path + "$", v_path) \
                             or re.findall(r"^" + nd_path_2, v_path):
                         print('+++++++++++++++++++++++++++++++cannot delete： ', v_path)
                     else:
                         shutil.rmtree(v_path)
-                        print('+++++++++++++++++++++++++++++++delete： ', v_path, '++++++++++++++++++++++++++++++++++++++++')
+                        # print('+++++++++++++++delete： ', v_path, '++++++++++++++++++++++++++++++')
                 # elif os.path.isfile(v_path):
                 #     os.remove(v_path)
         elif os.path.isdir(n_path):  # go file
@@ -1379,8 +1445,8 @@ def deal_local_repo(root_url, local_url, go_list, mod_list, tool_list, vendor_li
 def deal_local_repo_dir(repo_id):
     path_c = PATH()
     pkg_local = path_c.get_pkg_dir()  # pkg
-    deal_path = path_c.get_deal_local_dir()  # pkg/2
-    deal_repo_path = os.path.join(deal_path, repo_id)  # pkg/2/id
+    nd_path = path_c.get_deal_local_dir()  # pkg/2
+    deal_repo_path = os.path.join(nd_path, repo_id)  # pkg/2/id
     repo_url = os.path.join(pkg_local, repo_id)  # repo download dir  pkg/id
     file_name = os.path.join(deal_repo_path, 'hero-go.txt')
     mod_dir_name = os.path.join(deal_repo_path, 'mod')
@@ -1473,29 +1539,35 @@ def deal_local_repo_dir(repo_id):
         file = open(file_name, 'w')
         file.write(file_str)  # msg也就是下面的Hello world!
         file.close()
-        nd_path = os.path.join('root', 'www', 'run-tool', 'pkg', '2')
-        if nd_path == 'root/www/run-tool/pkg/2':
-            nd_path = '/' + nd_path
-            nd_path_2 = nd_path + '/'
-        else:
-            nd_path = '\\' + nd_path
-            nd_path_2 = nd_path + '\\'
+        # nd_path = deal_path
+        nd_path_2 = os.path.join(nd_path, '@').strip('@')
         if re.findall(r"^" + nd_path + "$", repo_url) \
                 or re.findall(r"^" + nd_path_2, repo_url):
-            print('+++++++++++++++++++++++++++++++不能删除： ', repo_url)
+            print('+++++++++++++++++++++++++++++++cannot delete: ', repo_url)
         else:
             shutil.rmtree(repo_url)
-            print('+++++++++++++++++++++++++++++++删除： ', repo_url, '++++++++++++++++++++++++++++++++++++++++')
+            # print('+++++++++++++++++++++++++++++++delete: ', repo_url, '++++++++++++++++++++++++++++++++++++++++')
     else:
         (mod_num, tool_num, vendor_list, self_ref, mod_list, tool_list, go_mod_module,
          direct_repo_list) = get_msg_hero_go(file_name)
         # os.path.getmtime(file) 获取修改时间
-        # [git_name, version, befor_name, siv_path, old]  old: 1 是旧路径；0 是新路径
+        # [git_name, version, befor_name, siv_path, old]  old: 1 是重定向的repo的旧路径; 0 是新路径; 2 最新为web路径，当前是旧路径
         for dep in direct_repo_list:
+            dep[0] = dep[0].replace('github.com/', '')
+            if dep[0] == '0' and len(dep) >= 3 and dep[2]:
+                dep[0] = dep[2]
+                dep[2] = '0'
+
             if len(dep) < 3:
                 siv_path = ''
                 now_name = check_repo_red_del(dep[0])
-                if now_name:
+                if now_name and now_name != '0':
+                    old_name = dep[0]
+                    dep[0] = now_name
+                    dep.append(old_name)
+                    dep.append(siv_path)
+                    dep.append(1)
+                elif now_name == '0':
                     dep.append(now_name)
                     dep.append(siv_path)
                     dep.append(1)
@@ -1503,16 +1575,67 @@ def deal_local_repo_dir(repo_id):
                     dep.append(now_name)
                     dep.append(siv_path)
                     dep.append(0)
+                if dep[4] == 0:
+                    # 看看是否更新了web地址
+                    new_web_name = get_new_url('github.com/' + dep[0])
+                    if new_web_name:
+                        dep[2] = new_web_name
+                        dep[3] = siv_path
+                        dep[4] = 2
             elif len(dep) == 3:
-                if dep[2]:
+                dep[2] = dep[2].replace('github.com/', '')
+                if dep[2] and dep[2] != '0':
                     siv_path = ''
-                    old_name = get_redirect_old_repo(dep[2])
-                    if old_name:
+                    old_name = get_redirect_old_repo(dep[0])
+                    if old_name and old_name != dep[2]:
+                        # 看看是否更新了web地址
+                        new_web_name = get_new_url('github.com/' + dep[0])
+                        if new_web_name:
+                            dep[2] = new_web_name
+                            dep.append(siv_path)
+                            dep.append(0)
+                        else:
+                            now_name = check_repo_red_del(dep[2])
+                            if now_name and now_name != '0':
+                                dep[0] = now_name
+                                dep.append(siv_path)
+                                dep.append(1)
+                            elif now_name == '0':
+                                dep[0] = dep[2]
+                                dep[2] = '0'
+                                dep.append(siv_path)
+                                dep.append(1)
+                            else:
+                                dep[0] = dep[2]
+                                dep[2] = ''
+                                dep.append(siv_path)
+                                dep.append(0)
+                    elif old_name == dep[2]:
                         dep.append(siv_path)
                         dep.append(1)
                     else:
-                        dep.append(siv_path)
-                        dep.append(0)
+                        new_web_name = get_new_url('github.com/' + dep[0])
+                        if new_web_name:
+                            dep[2] = new_web_name
+                            dep.append(siv_path)
+                            dep.append(0)
+                        else:
+                            now_name = check_repo_red_del(dep[2])
+                            if now_name and now_name != '0':
+                                dep[0] = now_name
+                                dep.append(siv_path)
+                                dep.append(1)
+                            elif now_name == '0':
+                                dep[0] = dep[2]
+                                dep[2] = '0'
+                                dep.append(siv_path)
+                                dep.append(1)
+                            else:
+                                dep[0] = dep[2]
+                                dep[2] = ''
+                                dep.append(siv_path)
+                                dep.append(0)
+
                 else:
                     siv_path = ''
                     now_name = check_repo_red_del(dep[0])
@@ -1524,21 +1647,66 @@ def deal_local_repo_dir(repo_id):
                         dep[2] = now_name
                         dep.append(siv_path)
                         dep.append(0)
-
+            else:  # len(dep) >= 4
+                dep[2] = dep[2].replace('github.com/', '')
+                if dep[2] and dep[2] != '0':
+                    old_name = get_redirect_old_repo(dep[0])
+                    if old_name and old_name != dep[2]:
+                        # 看看是否更新了web地址
+                        new_web_name = get_new_url('github.com/' + dep[0])
+                        if new_web_name:
+                            dep[2] = new_web_name
+                            dep[4] = 0
+                        else:
+                            now_name = check_repo_red_del(dep[2])
+                            if now_name and now_name != '0':
+                                dep[0] = now_name
+                                dep[4] = 1
+                            elif now_name == '0':
+                                dep[0] = dep[2]
+                                dep[2] = '0'
+                                dep[4] = 1
+                            else:
+                                dep[0] = dep[2]
+                                dep[2] = ''
+                                dep[4] = 0
+                    elif old_name == dep[2]:
+                        dep[4] = 1
+                    else:
+                        new_web_name = get_new_url('github.com/' + dep[0])
+                        if new_web_name:
+                            dep[2] = new_web_name
+                            dep[4] = 0
+                        else:
+                            now_name = check_repo_red_del(dep[2])
+                            if now_name and now_name != '0':
+                                dep[0] = now_name
+                                dep[4] = 1
+                            elif now_name == '0':
+                                dep[0] = dep[2]
+                                dep[2] = '0'
+                                dep[4] = 1
+                            else:
+                                dep[0] = dep[2]
+                                dep[2] = ''
+                                dep[4] = 0
+                else:
+                    now_name = check_repo_red_del(dep[0])
+                    if now_name:
+                        dep[2] = now_name
+                        dep[4] = 1
+                    else:
+                        dep[2] = now_name
+                        dep[4] = 0
         if os.path.exists(repo_url):
-            nd_path = os.path.join('root', 'www', 'run-tool', 'pkg', '2')
-            if nd_path == 'root/www/run-tool/pkg/2':
-                nd_path = '/' + nd_path
-                nd_path_2 = nd_path + '/'
-            else:
-                nd_path = '\\' + nd_path
-                nd_path_2 = nd_path + '\\'
+            # nd_path = deal_path
+            nd_path_2 = os.path.join(nd_path, '@').strip('@')
             if re.findall(r"^" + nd_path + "$", repo_url) \
                     or re.findall(r"^" + nd_path_2, repo_url):
-                print('+++++++++++++++++++++++++++++++不能删除： ', repo_url)
+                print('+++++++++++++++++++++++++++++++cannot delete: ', repo_url)
             else:
                 shutil.rmtree(repo_url)
-                print('+++++++++++++++++++++++++++++++删除： ', repo_url, '++++++++++++++++++++++++++++++++++++++++')
+                # print('+++++++++++++++++++++++++++++++delete: ', repo_url, '++++++++++++++++++++++++++++++++++++++++')
     return mod_num, tool_num, vendor_list, self_ref, mod_list, tool_list, go_mod_module, direct_repo_list
 
 
@@ -1620,7 +1788,7 @@ def get_dr_mod_api(search_name, page):
 
 def get_dr_tool_api(search_name, page, tool_str):
     url_tool = 'https://api.github.com/search/code?q=' + search_name + tool_str
-    url_tool = url_tool + '&page=' + page +'&per_page=100&access_token='
+    url_tool = url_tool + '&page=' + page + '&per_page=100&access_token='
     headers = get_headers()
     token = headers['Authorization'].replace('token ', '').strip()
     url_tool = url_tool + token
@@ -1787,6 +1955,29 @@ def judge_mod_or_tool(mod_num, tool_num, mod_url):
     else:
         # print('*non-module*')
         return 0
+
+
+def check_report_bug_type_dr(r_id):
+    (host, user, password, db_name) = get_db_insert()
+    sql = "SELECT bug_type FROM report_bug_type_dr WHERE id='%s'" % r_id
+    try:
+        # 执行sql语句
+        db_check = pymysql.connect(host, user, password, db_name)
+        check_cursor = db_check.cursor()
+        check_cursor.execute(sql)
+        check_result = check_cursor.fetchall()
+        check_cursor.close()
+        db_check.close()
+        if check_result:
+            # print(check_result[0], ' type is: ', type(check_result[0]))
+            # result_num = int(check_result[0][0])
+            return check_result[0][0]
+        else:
+            return ''
+    except Exception as exp:
+        print('check report_bug_type_dr error:',
+              exp, '--------------------------------------------------------------------------------------------------')
+        return ''
 
 
 class Repo:
@@ -2621,9 +2812,29 @@ class Repo:
             mod_path_list.append(mod_path)
         # print('mod_path_list: ', mod_path_list)
         ir_list = []
+        replace_l = []
         for url in mod_path_list:
-            ir_list = get_req_from_mod(url, ir_list)
+            (ir_list, replaces_list) = get_req_from_mod(url, ir_list)
+            for replace_r in replaces_list:
+                b_name = replace_r[0].split(' ')[0]
+                a_name = replace_r[1].split(' ')[0]
+                b_siv = get_imp_siv_path(b_name)
+                a_siv = get_imp_siv_path(a_name)
+                replace_l.append(b_name)
+                if not b_siv and a_siv:
+                    issue_mes = b_name + '@' + replace_r[0].replace(b_name, '').strip('') + '='
+                    issue_mes += a_name + '@' + replace_r[1].replace(a_name, '').replace(' ', '').strip('')
+                    if issue_mes:
+                        issue_repo_list.append([issue_mes, 2])
+
+        r_id = self.repo_name + self.v_hash
+
+        num_2_1 = 0
+        list_2_1 = []
         for req in ir_list:
+            print('d2:', req)
+            if req[2] == 1:
+                list_2_1.append([req[0], req[1]])
             if re.findall(r"github.com/", req[0]):
                 if re.findall(r"github.com/([^/]+?/[^/]+?)/.+?$", req[0]):
                     dep_name = re.findall(r"github.com/([^/]+?/[^/]+?)/.+?$", req[0])[0]
@@ -2635,17 +2846,46 @@ class Repo:
                     new_url = get_new_url(dep_name)
                     re_name = check_repo_red_del(dep_name)
                     if new_url or re_name or re_name == '0':
-                        if req[2] == 1:
-                            issue_mes = req[0] + '@' + req[1]
-                        else:
-                            if (re_name or re_name == '0') and not new_url:
-                                if re_name == '0':
-                                    issue_mes = req[0] + '@0'
-                                else:
-                                    issue_mes = req[0] + '@github.com/' + re_name
+                        # 有indirect是1，没有是0
+                        if (re_name or re_name == '0') and not new_url:
+                            if re_name == '0':
+                                issue_mes = req[0] + '@0'
                             else:
-                                issue_mes = req[0] + '@' + new_url
+                                issue_mes = req[0] + '@github.com/' + re_name
+                        else:
+                            issue_mes = req[0] + '@' + new_url
                         issue_repo_list.append([issue_mes, req[2]])
+                        if req[2] == 1:
+                            num_2_1 = num_2_1 + 1
+
+        if num_2_1 == 0:
+            # bug_type = check_report_bug_type_dr(r_id)
+            bug_type = '2-1=2-1'
+            if bug_type == '2-1=2-1':
+                for req in list_2_1:
+                    # 获取依赖项最新版本
+                    req_siv = get_imp_siv_path(req[0])
+                    if not req_siv and (req not in replace_l):
+                        (repo_name, siv_path) = get_repo_name(req[0])
+                        if repo_name:
+                            l_search_e = 0
+                            (v_name, v_hash, search_e) = get_last_version_or_hashi(repo_name, l_search_e)
+                            print('d2 get new version:', v_name, v_hash)
+                            if v_name or v_hash:
+                                issue_mes = ''
+                                if v_name:
+                                    l_repo = Repo(repo_name, v_name)
+                                    l_repo.init_no_starts()
+                                    if l_repo.mod_full_path and req != l_repo.mod_full_path:
+                                        issue_mes = req[0] + '@' + req[1] + '=' + l_repo.mod_full_path + '@' + v_name
+                                else:
+                                    l_repo = Repo(repo_name, v_hash)
+                                    l_repo.init_no_starts()
+                                    if l_repo.mod_full_path and req != l_repo.mod_full_path:
+                                        issue_mes = req[0] + '@' + req[1] + '=' + l_repo.mod_full_path + '@' + v_hash
+                                if issue_mes:
+                                    issue_repo_list.append([issue_mes, 1])
+
         return issue_repo_list
 
     def get_e_s_param(self):

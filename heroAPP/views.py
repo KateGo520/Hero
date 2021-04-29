@@ -18,6 +18,10 @@ def index(request):
     return render(request, "index.html")
 
 
+def artifacts(request):
+    return render(request, "artifacts.html")
+
+
 def data(request):
     data = []
     filename = os.path.join(BASE_URL, 'static', 'files', FILE)
@@ -106,7 +110,7 @@ def diagnosis(request):
         # print('check result:', insert_error)
         if insert_error == 0:
             # issues_list = []
-            down_msg = []
+
             msg = 'testing 1'
             repo_issue = ISSUE(repo_name, repo_version)
             repo_issue.init_with_dep_tree()
@@ -254,7 +258,7 @@ def diagnosis(request):
             # print(dep_tree_json)
             # issues_list.append('test1')
             # issues_list_json = json.dumps(issues_list)
-            down_msg_json = json.dumps(down_msg)
+            # print('dep_tree:', dep_tree)
             return JsonResponse({'result': insert_error, 'data': msg, 'dep_tree': dep_tree_json,
                                  'root_cause': report_l[0], 'solution': report_l[1]})
         else:

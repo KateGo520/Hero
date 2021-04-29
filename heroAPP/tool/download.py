@@ -10,7 +10,7 @@ class PATH:
 
     def __init__(self):
         self.path = os.getcwd()  # /root/www/hero-v2.0
-        self.path = self.path.replace('hero-v7.0', 'run-tool')
+        self.path = self.path.replace('hero-v11.0', 'run-tool')
 
         # self.path = os.path.join('root', 'www', 'run-tool')
         # print('path', self.path)
@@ -27,15 +27,21 @@ class PATH:
 
 
 def get_token():  # download 重复
-    # token 0a6cca72aa3cc98993950500c87831bfef7e5707
+    # token 0a6cca72aa3cc98993950500c87831bfef7e5707 [meng] x
     # token ad418c5441a67ad8b2c95188e131876c6a1187fe [end] x
     # token abdd967d350662632381f130cd62268ed2f961a1 [end] x
     # token ff4e63b2dba8febac0aeb59aa3b8829a05de97e7 [hu] x
     # token a41ca9587818fc355b015376e814df47223fc136 [me] x
-    # token a8ad3ffb79d2ef67a1f19da8245ff361e624dc20 [ql]
-    # token 6f8454c973d4f7f07a57c2982db79d2ce543403d [zs]
-    token_list = ['0a6cca72aa3cc98993950500c87831bfef7e5707', 'a8ad3ffb79d2ef67a1f19da8245ff361e624dc20',
-                  '6f8454c973d4f7f07a57c2982db79d2ce543403d']
+
+    # token a8ad3ffb79d2ef67a1f19da8245ff361e624dc20 [ql] x
+    # token 6f8454c973d4f7f07a57c2982db79d2ce543403d [zs] x
+    # token 3e87d1e3a489815cdf597a10b426ad1e2a7426db [zs] x
+    # token 24748c727dfbcbfa18c3478f495c2b8b6ed1703e [ql] x
+    # token 412aed2204841af74b641fbbc7bfdd2274ca9d71 [ql]
+    # token 7e874141d51454c0b7eeee77052bf4977588c076 [djt]
+    # token c2f78adf111b7630ca6bd643876f6dd68b781f8f [zs] 
+    token_list = ['412aed2204841af74b641fbbc7bfdd2274ca9d71', '7e874141d51454c0b7eeee77052bf4977588c076',
+                  'c2f78adf111b7630ca6bd643876f6dd68b781f8f']
     index_num = random.randint(0, 2)
     return token_list[index_num]
 
